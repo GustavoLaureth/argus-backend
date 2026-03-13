@@ -1,0 +1,149 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<!-- Main Content -->
+<main class="flex-1 max-w-4xl mx-auto p-8 lg:p-12">
+  <header class="mb-10">
+    <h2
+      class="text-3xl font-black text-slate-900 dark:text-white tracking-tight"
+    >
+      Meu Perfil
+    </h2>
+    <p class="text-slate-500 dark:text-slate-400 mt-2">
+      Gerencie suas informações pessoais e segurança da conta Argus AI.
+    </p>
+  </header>
+  <section class="space-y-8">
+    <!-- Dados Pessoais -->
+    <div
+      class="bg-white dark:bg-[#1c2326] rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm"
+    >
+      <div class="flex items-center gap-2 mb-6 text-primary">
+        <span class="material-symbols-outlined">badge</span>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+          Dados Pessoais
+        </h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="flex flex-col gap-2">
+          <label
+            class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+            >Nome completo</label
+          >
+          <input
+            class="w-full h-12 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+            placeholder="Digite seu nome"
+            type="text"
+            value="Teste"
+          />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label
+            class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+            >E-mail</label
+          >
+          <div class="relative flex items-center">
+            <input
+              class="w-full h-12 px-4 pr-12 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-not-allowed italic"
+              disabled=""
+              type="email"
+              value="teste@useargus.com.br"
+            />
+            <span
+              class="material-symbols-outlined absolute right-4 text-slate-400 text-xl"
+              >lock</span
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Segurança / Alterar Senha -->
+    <div
+      class="bg-white dark:bg-[#1c2326] rounded-xl border border-slate-200 dark:border-slate-800 p-6 shadow-sm"
+    >
+      <div class="flex items-center gap-2 mb-6 text-primary">
+        <span class="material-symbols-outlined">security</span>
+        <h3 class="text-lg font-bold text-slate-900 dark:text-white">
+          Alterar Senha
+        </h3>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="flex flex-col gap-2">
+          <label
+            class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+            >Senha atual</label
+          >
+          <input
+            class="w-full h-12 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary outline-none transition-all"
+            placeholder="••••••••"
+            type="password"
+          />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label
+            class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+            >Nova senha</label
+          >
+          <input
+            class="w-full h-12 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary outline-none transition-all"
+            placeholder="••••••••"
+            type="password"
+          />
+        </div>
+        <div class="flex flex-col gap-2">
+          <label
+            class="text-sm font-semibold text-slate-700 dark:text-slate-300"
+            >Confirmar nova senha</label
+          >
+          <input
+            class="w-full h-12 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary outline-none transition-all"
+            placeholder="••••••••"
+            type="password"
+          />
+        </div>
+      </div>
+      <p class="mt-4 text-xs text-slate-500 dark:text-slate-400">
+        A senha deve conter pelo menos 8 caracteres, incluindo letras e números.
+      </p>
+    </div>
+    <!-- Footer Buttons -->
+    <div class="flex items-center justify-end gap-4 pt-4">
+      <button
+        class="px-6 py-3 rounded-lg font-bold text-slate-600 dark:text-slate-400 hover:bg-slate-200 dark:hover:bg-slate-800 transition-all"
+      >
+        Descartar
+      </button>
+      <button
+        class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-bold flex items-center gap-2 shadow-lg shadow-primary/30 transition-all transform active:scale-95"
+      >
+        <span class="material-symbols-outlined text-xl">save</span>
+        Salvar Alterações
+      </button>
+    </div>
+  </section>
+  <!-- Account Status Component -->
+  <div
+    class="mt-12 p-6 bg-primary/10 dark:bg-primary/5 border border-primary/20 dark:border-primary/10 rounded-xl flex items-center justify-between"
+  >
+    <div class="flex items-center gap-4">
+      <div
+        class="size-12 rounded-full bg-primary/20 flex items-center justify-center text-primary"
+      >
+        <span class="material-symbols-outlined text-3xl">verified_user</span>
+      </div>
+      <div>
+        <h4 class="font-bold text-slate-900 dark:text-white">
+          Conta Verificada
+        </h4>
+        <p class="text-sm text-slate-600 dark:text-slate-400">
+          Seu e-mail foi confirmado e sua conta está protegida.
+        </p>
+      </div>
+    </div>
+    <span
+      class="text-xs font-bold uppercase tracking-widest text-primary bg-primary/10 px-3 py-1 rounded-full"
+      >Ativo</span
+    >
+  </div>
+</main>
+{% endblock %}

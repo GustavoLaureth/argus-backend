@@ -1,0 +1,137 @@
+<!doctype html>
+
+<html class="light" lang="pt-br">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Argus AI</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#0F4C75",
+              secondary: "#3282B8",
+              accent: "#1B262C",
+              "light-accent": "#BBE1FA",
+              "background-light": "#f6f7f8",
+              "background-dark": "#111c21",
+            },
+            fontFamily: {
+              display: ["Figtree", "sans-serif"],
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        font-family: "Work Sans", sans-serif;
+      }
+      .material-symbols-outlined {
+        font-variation-settings:
+          "FILL" 0,
+          "wght" 400,
+          "GRAD" 0,
+          "opsz" 24;
+      }
+    </style>
+  </head>
+  <body
+    class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-200"
+  >
+    <div class="flex h-screen overflow-hidden">
+      <!-- Sidebar -->
+      <aside
+        class="w-64 flex-shrink-0 flex flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark"
+      >
+        <div class="p-6 flex items-center gap-3">
+          <div
+            class="size-10 rounded-lg bg-primary flex items-center justify-center text-white"
+          >
+            <span class="material-symbols-outlined text-2xl">monitoring</span>
+          </div>
+          <div>
+            <h1 class="text-xl font-black tracking-tight text-primary">
+              Argus AI
+            </h1>
+            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">
+              Inteligência Artificial
+            </p>
+          </div>
+        </div>
+        <nav class="flex-1 px-4 space-y-2 mt-4">
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold"
+            href={% url 'dashboard' %}
+          >
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            href={% url 'create' %}
+          >
+            <span class="material-symbols-outlined">edit_square</span>
+            <span>Gerar Conteúdo</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            href={% url 'history' %}
+          >
+            <span class="material-symbols-outlined">history</span>
+            <span>Histórico</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            href={% url 'subscription' %}
+          >
+            <span class="material-symbols-outlined">workspace_premium</span>
+            <span>Planos</span>
+          </a>
+          <a
+            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            href={% url 'profile' %}
+          >
+            <span class="material-symbols-outlined">person</span>
+            <span>Perfil</span>
+          </a>
+        </nav>
+        <div class="p-4 border-t border-slate-200 dark:border-slate-800">
+          <div class="bg-light-accent/30 dark:bg-primary/20 rounded-xl p-4">
+            <p
+              class="text-xs font-bold text-primary mb-1 uppercase tracking-wider"
+            >
+              Uso do Plano
+            </p>
+            <div
+              class="w-full bg-slate-200 dark:bg-slate-700 h-1.5 rounded-full mt-2"
+            >
+              <div class="bg-primary h-full rounded-full w-[42%]"></div>
+            </div>
+            <p class="text-[10px] mt-2 text-slate-500 dark:text-slate-400">
+              42 de 100 créditos usados
+            </p>
+          </div>
+        </div>
+      </aside>
+      {% block content %}{% endblock %}
+  </body>
+</html>

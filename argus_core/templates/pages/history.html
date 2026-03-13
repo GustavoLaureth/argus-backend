@@ -1,0 +1,388 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+<!-- Main Content -->
+<main class="flex-1 flex flex-col overflow-hidden">
+  <!-- Top Nav Bar -->
+  <header
+    class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark flex items-center justify-between px-8"
+  >
+    <div class="flex-1 max-w-md">
+      <div class="relative group">
+        <span
+          class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"
+          >search</span
+        >
+        <input
+          class="w-full bg-slate-100 dark:bg-slate-900 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 transition-all"
+          placeholder="Pesquisar no histórico..."
+          type="text"
+        />
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <button
+        class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-full transition-colors relative"
+      >
+        <span class="material-symbols-outlined">notifications</span>
+        <span
+          class="absolute top-2 right-2 size-2 bg-red-500 rounded-full border-2 border-white dark:border-background-dark"
+        ></span>
+      </button>
+      <button
+        class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors shadow-sm"
+      >
+        <span class="material-symbols-outlined text-sm">bolt</span>
+        Upgrade
+      </button>
+    </div>
+  </header>
+  <!-- Content Area -->
+  <div
+    class="flex-1 overflow-y-auto p-8 bg-background-light dark:bg-background-dark"
+  >
+    <div class="max-w-6xl mx-auto space-y-6">
+      <!-- Title and Actions -->
+      <div
+        class="flex flex-col md:flex-row md:items-center justify-between gap-4"
+      >
+        <div>
+          <h2 class="text-2xl font-bold text-slate-800 dark:text-slate-100">
+            Histórico de Gerações
+          </h2>
+          <p class="text-slate-500 text-sm">
+            Gerencie e recupere seus conteúdos gerados anteriormente.
+          </p>
+        </div>
+        <div class="flex items-center gap-2">
+          <button
+            class="flex items-center gap-2 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 px-3 py-2 rounded-lg text-sm font-medium text-slate-600 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-800 transition-colors"
+          >
+            <span class="material-symbols-outlined text-lg">file_download</span>
+            Exportar
+          </button>
+          <button
+            class="flex items-center gap-2 bg-primary text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-primary/90 transition-colors"
+          >
+            <span class="material-symbols-outlined text-lg">add</span>
+            Nova Criação
+          </button>
+        </div>
+      </div>
+      <!-- Filters -->
+      <div class="flex flex-wrap items-center gap-3">
+        <button
+          class="bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold"
+        >
+          Todos
+        </button>
+        <button
+          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1"
+        >
+          <span class="material-symbols-outlined text-sm">article</span>
+          Texto
+        </button>
+        <button
+          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1"
+        >
+          <span class="material-symbols-outlined text-sm">code</span>
+          Código
+        </button>
+        <button
+          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1"
+        >
+          <span class="material-symbols-outlined text-sm">image</span>
+          Imagens
+        </button>
+        <div class="h-4 w-[1px] bg-slate-300 dark:bg-slate-700 mx-2"></div>
+        <button
+          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1"
+        >
+          <span class="material-symbols-outlined text-sm">calendar_today</span>
+          Últimos 30 dias
+          <span class="material-symbols-outlined text-sm">expand_more</span>
+        </button>
+      </div>
+      <!-- History Table -->
+      <div
+        class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 overflow-hidden shadow-sm"
+      >
+        <div class="overflow-x-auto">
+          <table class="w-full text-left border-collapse">
+            <thead>
+              <tr
+                class="bg-slate-50 dark:bg-slate-800/50 border-b border-slate-200 dark:border-slate-800"
+              >
+                <th
+                  class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider"
+                >
+                  Data
+                </th>
+                <th
+                  class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider"
+                >
+                  Tipo
+                </th>
+                <th
+                  class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider"
+                >
+                  Preview do Conteúdo
+                </th>
+                <th
+                  class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider text-right"
+                >
+                  Ações
+                </th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
+              <!-- Row 1 -->
+              <tr
+                class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group"
+              >
+                <td
+                  class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium"
+                >
+                  24/05/2024
+                </td>
+                <td class="px-6 py-4">
+                  <div
+                    class="flex items-center justify-center size-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
+                  >
+                    <span class="material-symbols-outlined text-lg"
+                      >article</span
+                    >
+                  </div>
+                </td>
+                <td class="px-6 py-4 max-w-md">
+                  <div
+                    class="text-sm text-slate-800 dark:text-slate-200 font-medium truncate"
+                  >
+                    Post para Instagram sobre tecnologia
+                  </div>
+                  <div
+                    class="text-xs text-slate-500 dark:text-slate-500 truncate mt-1"
+                  >
+                    "A revolução da IA está apenas começando. Descubra como as
+                    novas ferramentas estão..."
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >content_copy</span
+                    >
+                    Copiar
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 2 -->
+              <tr
+                class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group"
+              >
+                <td
+                  class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium"
+                >
+                  23/05/2024
+                </td>
+                <td class="px-6 py-4">
+                  <div
+                    class="flex items-center justify-center size-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400"
+                  >
+                    <span class="material-symbols-outlined text-lg">code</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 max-w-md">
+                  <div
+                    class="text-sm text-slate-800 dark:text-slate-200 font-medium truncate"
+                  >
+                    Script Python para automação de dados
+                  </div>
+                  <div
+                    class="text-xs text-slate-500 dark:text-slate-500 truncate mt-1"
+                  >
+                    import pandas as pd \n df = pd.read_csv('vendas.csv')...
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >content_copy</span
+                    >
+                    Copiar
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 3 -->
+              <tr
+                class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group"
+              >
+                <td
+                  class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium"
+                >
+                  22/05/2024
+                </td>
+                <td class="px-6 py-4">
+                  <div
+                    class="flex items-center justify-center size-8 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400"
+                  >
+                    <span class="material-symbols-outlined text-lg">mail</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 max-w-md">
+                  <div
+                    class="text-sm text-slate-800 dark:text-slate-200 font-medium truncate"
+                  >
+                    E-mail de marketing para campanha de verão
+                  </div>
+                  <div
+                    class="text-xs text-slate-500 dark:text-slate-500 truncate mt-1"
+                  >
+                    Assunto: Ofertas imperdíveis chegaram com o sol! Olá [Nome],
+                    temos novidades...
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >content_copy</span
+                    >
+                    Copiar
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 4 -->
+              <tr
+                class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group"
+              >
+                <td
+                  class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium"
+                >
+                  22/05/2024
+                </td>
+                <td class="px-6 py-4">
+                  <div
+                    class="flex items-center justify-center size-8 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400"
+                  >
+                    <span class="material-symbols-outlined text-lg">image</span>
+                  </div>
+                </td>
+                <td class="px-6 py-4 max-w-md">
+                  <div
+                    class="text-sm text-slate-800 dark:text-slate-200 font-medium truncate"
+                  >
+                    Prompt de Imagem: Paisagem Futurista
+                  </div>
+                  <div
+                    class="text-xs text-slate-500 dark:text-slate-500 truncate mt-1"
+                  >
+                    Cyberpunk city in neo-tokyo, raining, high detail, 8k,
+                    cinematic lighting...
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >content_copy</span
+                    >
+                    Copiar
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 5 -->
+              <tr
+                class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group"
+              >
+                <td
+                  class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium"
+                >
+                  21/05/2024
+                </td>
+                <td class="px-6 py-4">
+                  <div
+                    class="flex items-center justify-center size-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
+                  >
+                    <span class="material-symbols-outlined text-lg"
+                      >description</span
+                    >
+                  </div>
+                </td>
+                <td class="px-6 py-4 max-w-md">
+                  <div
+                    class="text-sm text-slate-800 dark:text-slate-200 font-medium truncate"
+                  >
+                    Resumo de Reunião Trimestral
+                  </div>
+                  <div
+                    class="text-xs text-slate-500 dark:text-slate-500 truncate mt-1"
+                  >
+                    Pontos chave: Aumento de 20% no engajamento, novos desafios
+                    de logística...
+                  </div>
+                </td>
+                <td class="px-6 py-4 text-right">
+                  <button
+                    class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
+                  >
+                    <span class="material-symbols-outlined text-sm"
+                      >content_copy</span
+                    >
+                    Copiar
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <!-- Pagination -->
+        <div
+          class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between border-t border-slate-200 dark:border-slate-800"
+        >
+          <span class="text-xs text-slate-500 dark:text-slate-400"
+            >Mostrando 1-5 de 24 gerações</span
+          >
+          <div class="flex items-center gap-2">
+            <button
+              class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >chevron_left</span
+              >
+            </button>
+            <button
+              class="size-8 flex items-center justify-center rounded bg-primary text-white font-bold text-xs"
+            >
+              1
+            </button>
+            <button
+              class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-medium"
+            >
+              2
+            </button>
+            <button
+              class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-medium"
+            >
+              3
+            </button>
+            <button
+              class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >chevron_right</span
+              >
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

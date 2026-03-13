@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Main Content -->
+<main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
+  <!-- Topbar -->
+  <header
+    class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md flex items-center justify-between px-8 sticky top-0 z-10"
+  >
+    <div class="flex items-center flex-1 max-w-md">
+      <div class="relative w-full">
+        <span
+          class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl"
+          >search</span
+        >
+        <input
+          class="w-full pl-10 pr-4 py-2 bg-slate-100 dark:bg-slate-800 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20"
+          placeholder="Pesquisar no histórico..."
+          type="text"
+        />
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <button
+        class="p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg relative"
+      >
+        <span class="material-symbols-outlined">notifications</span>
+        <span
+          class="absolute top-2 right-2 w-2 h-2 bg-red-500 rounded-full border-2 border-white dark:border-background-dark"
+        ></span>
+      </button>
+      <div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
+      <div class="flex items-center gap-3">
+        <div class="text-right hidden sm:block">
+          <p class="text-sm font-semibold">Teste</p>
+          <p class="text-xs text-slate-500">teste@useargus.com.br</p>
+        </div>
+        <div
+          class="h-10 w-10 rounded-full bg-secondary bg-cover bg-center border-2 border-primary/10"
+          data-alt="Avatar do usuário Lucas Silva"
+          style="
+            background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAzp5LVmjZg910ZtGRax3FYKDEB7npz2yok_lm1i0vKFSgJmFYq8A8O15w21laiiMWVdRh1ja6uM6Z-NTssl83srid7-EDxCkigxsUyfKzxH7fusBrzqda53kqZB2l3D5M7xIk_8KZa_apMK6NTxqFMqUcuK7vNfpOEWDvBR3-ny94nQyZZ81jo_3dGb-zOBaSy2WNA2xhvbvy7dbvmNsfYLuPllwr5EkIT7BuHO4w5EVy9Qu1ZIYvsrRYCH4qk1J0nDNP95-Z_-Ydz&quot;);
+          "
+        ></div>
+      </div>
+    </div>
+  </header>
+  <!-- Dashboard Content -->
+  <div class="p-8">
+    <div
+      class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8"
+    >
+      <div>
+        <h2 class="text-3xl font-black text-slate-900 dark:text-slate-100">
+          Bem-vindo, Criador
+        </h2>
+        <p class="text-slate-500 dark:text-slate-400">
+          Aqui está o que aconteceu com seus projetos hoje.
+        </p>
+      </div>
+      <button
+        class="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20"
+      >
+        <span class="material-symbols-outlined">add_circle</span>
+        Novo Conteúdo
+      </button>
+    </div>
+    <!-- Stats Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+      <div
+        class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-2 bg-primary/10 rounded-lg">
+            <span class="material-symbols-outlined text-primary"
+              >auto_awesome</span
+            >
+          </div>
+          <span
+            class="text-xs font-bold text-red-500 bg-red-50 dark:bg-red-900/20 px-2 py-1 rounded"
+            >-5%</span
+          >
+        </div>
+        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">
+          Gerações Restantes
+        </p>
+        <h3 class="text-3xl font-black mt-1">
+          42 <span class="text-lg font-normal text-slate-400">/ 100</span>
+        </h3>
+      </div>
+      <div
+        class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-2 bg-secondary/10 rounded-lg">
+            <span class="material-symbols-outlined text-secondary"
+              >verified</span
+            >
+          </div>
+          <span
+            class="text-xs font-bold text-green-500 bg-green-50 dark:bg-green-900/20 px-2 py-1 rounded"
+            >Ativo</span
+          >
+        </div>
+        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">
+          Plano Atual
+        </p>
+        <h3 class="text-3xl font-black mt-1 text-secondary">Creator</h3>
+      </div>
+      <div
+        class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm md:col-span-2 lg:col-span-1"
+      >
+        <div class="flex items-center justify-between mb-4">
+          <div class="p-2 bg-accent/10 rounded-lg">
+            <span
+              class="material-symbols-outlined text-accent dark:text-light-accent"
+              >schedule</span
+            >
+          </div>
+        </div>
+        <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">
+          Tempo de Economia
+        </p>
+        <h3 class="text-3xl font-black mt-1">12.4h</h3>
+        <p class="text-xs text-slate-400 mt-2">Comparado ao método manual</p>
+      </div>
+    </div>
+    <!-- Recent Activity -->
+    <div
+      class="bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden"
+    >
+      <div
+        class="px-6 py-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between"
+      >
+        <h3 class="font-bold text-lg">Histórico Recente</h3>
+        <a class="text-primary text-sm font-semibold hover:underline" href="#"
+          >Ver tudo</a
+        >
+      </div>
+      <div class="divide-y divide-slate-100 dark:divide-slate-800">
+        <!-- History Item 1 -->
+        <div
+          class="px-6 py-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
+        >
+          <div class="flex items-center gap-4">
+            <div
+              class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center"
+            >
+              <span class="material-symbols-outlined text-slate-500"
+                >article</span
+              >
+            </div>
+            <div>
+              <h4 class="font-bold text-slate-800 dark:text-slate-200">
+                Post de Blog: Futuro da IA
+              </h4>
+              <p class="text-xs text-slate-500">
+                Gerado há 2 horas • 1.2k palavras
+              </p>
+            </div>
+          </div>
+          <div class="flex items-center gap-2">
+            <button
+              class="p-2 text-slate-400 hover:text-primary transition-colors"
+            >
+              <span class="material-symbols-outlined text-xl">download</span>
+            </button>
+            <button
+              class="p-2 text-slate-400 hover:text-primary transition-colors"
+            >
+              <span class="material-symbols-outlined text-xl">more_vert</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+{% endblock %}

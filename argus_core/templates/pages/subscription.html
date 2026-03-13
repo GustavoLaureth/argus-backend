@@ -1,0 +1,337 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<main class="flex-1 max-w-6xl mx-auto w-full px-6 py-10">
+  <!-- Hero Section -->
+  <div class="mb-10">
+    <h1
+      class="text-4xl font-black tracking-tight text-slate-900 dark:text-white mb-2"
+    >
+      Planos e Assinatura
+    </h1>
+    <p class="text-slate-600 dark:text-slate-400 text-lg">
+      Gerencie seu uso mensal e escolha o plano ideal para escalar seus
+      resultados.
+    </p>
+  </div>
+  <!-- Active Plan Status -->
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+    <div
+      class="lg:col-span-2 bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 p-8 shadow-sm"
+    >
+      <div
+        class="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8"
+      >
+        <div class="flex items-center gap-4">
+          <div
+            class="size-16 rounded-xl bg-primary/10 flex items-center justify-center text-primary"
+          >
+            <span class="material-symbols-outlined text-4xl"
+              >rocket_launch</span
+            >
+          </div>
+          <div>
+            <span
+              class="text-xs font-bold text-primary uppercase tracking-wider"
+              >Plano Atual</span
+            >
+            <h3 class="text-2xl font-bold text-slate-900 dark:text-white">
+              Plano Creator
+            </h3>
+          </div>
+        </div>
+        <div class="flex gap-3">
+          <button
+            class="px-5 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-lg font-semibold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+          >
+            Gerenciar Faturamento
+          </button>
+          <button
+            class="px-5 py-2.5 bg-primary text-white rounded-lg font-semibold text-sm hover:bg-primary/90 transition-colors shadow-lg shadow-primary/20"
+          >
+            Mudar Plano
+          </button>
+        </div>
+      </div>
+      <div class="space-y-4">
+        <div class="flex justify-between items-end">
+          <div>
+            <p class="text-sm font-medium text-slate-500 dark:text-slate-400">
+              Créditos de Processamento
+            </p>
+            <p class="text-3xl font-black text-slate-900 dark:text-white">
+              7.500
+              <span class="text-lg font-medium text-slate-400">/ 10.000</span>
+            </p>
+          </div>
+          <p
+            class="text-sm font-bold text-primary bg-primary/10 px-3 py-1 rounded-full"
+          >
+            75% Utilizado
+          </p>
+        </div>
+        <div
+          class="h-3 w-full bg-slate-100 dark:bg-slate-800 rounded-full overflow-hidden"
+        >
+          <div
+            class="h-full bg-primary rounded-full transition-all duration-500"
+            style="width: 75%"
+          ></div>
+        </div>
+        <p
+          class="text-sm text-slate-500 dark:text-slate-500 flex items-center gap-1"
+        >
+          <span class="material-symbols-outlined text-sm">info</span>
+          Seu limite será renovado em 12 de Outubro de 2023.
+        </p>
+      </div>
+    </div>
+    <div
+      class="bg-primary rounded-xl p-8 text-white shadow-xl shadow-primary/30 flex flex-col justify-between relative overflow-hidden"
+    >
+      <div class="relative z-10">
+        <h4 class="text-xl font-bold mb-2">Precisa de mais?</h4>
+        <p class="text-white/80 text-sm leading-relaxed mb-6">
+          Contrate créditos adicionais avulsos ou faça o upgrade para o plano
+          Pro e tenha recursos ilimitados.
+        </p>
+        <ul class="space-y-3 mb-8">
+          <li class="flex items-center gap-2 text-sm font-medium">
+            <span class="material-symbols-outlined text-lg">check_circle</span>
+            Suporte Prioritário 24/7
+          </li>
+          <li class="flex items-center gap-2 text-sm font-medium">
+            <span class="material-symbols-outlined text-lg">check_circle</span>
+            Modelos Customizados
+          </li>
+        </ul>
+      </div>
+      <button
+        class="w-full py-3 bg-white text-primary rounded-lg font-bold hover:bg-slate-50 transition-colors relative z-10"
+      >
+        Ver Plano Pro
+      </button>
+      <!-- Abstract Background Pattern -->
+      <div class="absolute -bottom-10 -right-10 opacity-20">
+        <span class="material-symbols-outlined text-[160px]">diamond</span>
+      </div>
+    </div>
+  </div>
+  <!-- Pricing Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+    <!-- Free Plan -->
+    <div
+      class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 flex flex-col h-full hover:shadow-md transition-shadow"
+    >
+      <div class="mb-6">
+        <h4 class="text-lg font-bold text-slate-900 dark:text-white">Free</h4>
+        <p class="text-sm text-slate-500 dark:text-slate-400">
+          Para experimentação
+        </p>
+      </div>
+      <div class="mb-6">
+        <span class="text-4xl font-black text-slate-900 dark:text-white"
+          >R$ 0</span
+        >
+        <span class="text-slate-500">/mês</span>
+      </div>
+      <ul class="space-y-4 mb-8 flex-1">
+        <li
+          class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"
+        >
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          500 créditos mensais
+        </li>
+        <li
+          class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"
+        >
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          1 projeto ativo
+        </li>
+        <li class="flex items-start gap-2 text-sm text-slate-400">
+          <span
+            class="material-symbols-outlined text-slate-300 dark:text-slate-700 text-lg"
+            >close</span
+          >
+          Exportação em HD
+        </li>
+      </ul>
+      <button
+        class="w-full py-2.5 border border-slate-200 dark:border-slate-700 text-slate-500 dark:text-slate-400 rounded-lg font-semibold text-sm cursor-not-allowed"
+      >
+        Plano Atual
+      </button>
+    </div>
+    <!-- Starter Plan -->
+    <div
+      class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl p-6 flex flex-col h-full hover:shadow-md transition-shadow"
+    >
+      <div class="mb-6">
+        <h4 class="text-lg font-bold text-slate-900 dark:text-white">
+          Starter
+        </h4>
+        <p class="text-sm text-slate-500 dark:text-slate-400">
+          Para iniciantes
+        </p>
+      </div>
+      <div class="mb-6">
+        <span class="text-4xl font-black text-slate-900 dark:text-white"
+          >R$ 49</span
+        >
+        <span class="text-slate-500">/mês</span>
+      </div>
+      <ul class="space-y-4 mb-8 flex-1">
+        <li
+          class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"
+        >
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          2.500 créditos mensais
+        </li>
+        <li
+          class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"
+        >
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          5 projetos ativos
+        </li>
+        <li
+          class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"
+        >
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          Exportação em HD
+        </li>
+      </ul>
+      <button
+        class="w-full py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-900 dark:text-white rounded-lg font-semibold text-sm hover:bg-slate-200 dark:hover:bg-slate-700 transition-colors"
+      >
+        Selecionar
+      </button>
+    </div>
+    <!-- Creator Plan (Featured) -->
+    <div
+      class="bg-white dark:bg-slate-900 border-2 border-primary rounded-xl p-6 flex flex-col h-full shadow-lg relative"
+    >
+      <div
+        class="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full"
+      >
+        Ativo
+      </div>
+      <div class="mb-6">
+        <h4 class="text-lg font-bold text-slate-900 dark:text-white">
+          Creator
+        </h4>
+        <p class="text-sm text-slate-500 dark:text-slate-400">
+          Para profissionais
+        </p>
+      </div>
+      <div class="mb-6">
+        <span class="text-4xl font-black text-slate-900 dark:text-white"
+          >R$ 99</span
+        >
+        <span class="text-slate-500">/mês</span>
+      </div>
+      <ul class="space-y-4 mb-8 flex-1">
+        <li
+          class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"
+        >
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          10.000 créditos mensais
+        </li>
+        <li
+          class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"
+        >
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          Projetos ilimitados
+        </li>
+        <li
+          class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"
+        >
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          Suporte prioritário
+        </li>
+        <li
+          class="flex items-start gap-2 text-sm text-slate-600 dark:text-slate-300"
+        >
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          Remoção de marca d'água
+        </li>
+      </ul>
+      <button
+        class="w-full py-2.5 bg-primary/10 text-primary rounded-lg font-bold text-sm cursor-default"
+      >
+        Plano Atual
+      </button>
+    </div>
+    <!-- Pro Plan -->
+    <div
+      class="bg-slate-900 border border-slate-800 rounded-xl p-6 flex flex-col h-full hover:shadow-xl transition-shadow group"
+    >
+      <div class="mb-6">
+        <h4 class="text-lg font-bold text-white">Pro</h4>
+        <p class="text-sm text-slate-400">Poder total de IA</p>
+      </div>
+      <div class="mb-6">
+        <span class="text-4xl font-black text-white">R$ 249</span>
+        <span class="text-slate-500">/mês</span>
+      </div>
+      <ul class="space-y-4 mb-8 flex-1">
+        <li class="flex items-start gap-2 text-sm text-slate-300">
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          50.000 créditos mensais
+        </li>
+        <li class="flex items-start gap-2 text-sm text-slate-300">
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          Acesso a modelos Beta
+        </li>
+        <li class="flex items-start gap-2 text-sm text-slate-300">
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          API dedicada
+        </li>
+        <li class="flex items-start gap-2 text-sm text-slate-300">
+          <span class="material-symbols-outlined text-primary text-lg"
+            >check</span
+          >
+          Treinamento personalizado
+        </li>
+      </ul>
+      <button
+        class="w-full py-2.5 bg-primary text-white rounded-lg font-bold text-sm hover:bg-primary/90 transition-all group-hover:scale-[1.02]"
+      >
+        Upgrade Agora
+      </button>
+    </div>
+  </div>
+  <!-- FAQ or Support Footer -->
+  <div class="mt-16 text-center">
+    <p class="text-slate-600 dark:text-slate-400">
+      Precisa de um plano customizado para sua empresa?
+      <a class="text-primary font-bold hover:underline" href="#"
+        >Entre em contato com nosso time de vendas.</a
+      >
+    </p>
+  </div>
+</main>
+{% endblock %}
