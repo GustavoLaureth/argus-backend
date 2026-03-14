@@ -32,14 +32,14 @@
       <div class="h-8 w-[1px] bg-slate-200 dark:bg-slate-800 mx-2"></div>
       <div class="flex items-center gap-3">
         <div class="text-right hidden sm:block">
-          <p class="text-sm font-semibold">Teste</p>
-          <p class="text-xs text-slate-500">teste@useargus.com.br</p>
+          <p class="text-sm font-semibold">{{ request.user.get_full_name }}</p>
+          <p class="text-xs text-slate-500">{{ request.user.email }}</p>
         </div>
         <div
           class="h-10 w-10 rounded-full bg-secondary bg-cover bg-center border-2 border-primary/10"
           data-alt="Avatar do usuário Lucas Silva"
           style="
-            background-image: url(&quot;https://lh3.googleusercontent.com/aida-public/AB6AXuAzp5LVmjZg910ZtGRax3FYKDEB7npz2yok_lm1i0vKFSgJmFYq8A8O15w21laiiMWVdRh1ja6uM6Z-NTssl83srid7-EDxCkigxsUyfKzxH7fusBrzqda53kqZB2l3D5M7xIk_8KZa_apMK6NTxqFMqUcuK7vNfpOEWDvBR3-ny94nQyZZ81jo_3dGb-zOBaSy2WNA2xhvbvy7dbvmNsfYLuPllwr5EkIT7BuHO4w5EVy9Qu1ZIYvsrRYCH4qk1J0nDNP95-Z_-Ydz&quot;);
+            background-image: url(&quot;{{ request.user.socialaccount_set.all.0.extra_data.picture }}&quot;);
           "
         ></div>
       </div>
@@ -52,7 +52,7 @@
     >
       <div>
         <h2 class="text-3xl font-black text-slate-900 dark:text-slate-100">
-          Bem-vindo, Criador
+          Bem-vindo, {{ request.user.get_full_name }}
         </h2>
         <p class="text-slate-500 dark:text-slate-400">
           Aqui está o que aconteceu com seus projetos hoje.
