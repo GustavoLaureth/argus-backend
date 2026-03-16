@@ -1,6 +1,4 @@
-{% extends 'base.html' %} 
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <!-- Main Content -->
 <main class="flex-1 flex flex-col overflow-hidden">
   <!-- Top Nav Bar -->
@@ -136,15 +134,17 @@
               </tr>
             </thead>
             <tbody class="divide-y divide-slate-100 dark:divide-slate-800">
-              <!-- Row 1 -->
+              {% for g in generations %}
+
               <tr
                 class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group"
               >
                 <td
                   class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium"
                 >
-                  24/05/2024
+                  {{ g.created_at|date:"d/m/Y" }}
                 </td>
+
                 <td class="px-6 py-4">
                   <div
                     class="flex items-center justify-center size-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
@@ -154,21 +154,24 @@
                     >
                   </div>
                 </td>
+
                 <td class="px-6 py-4 max-w-md">
                   <div
                     class="text-sm text-slate-800 dark:text-slate-200 font-medium truncate"
                   >
-                    Post para Instagram sobre tecnologia
+                    {{ g.get_content_type_display }}
                   </div>
+
                   <div
                     class="text-xs text-slate-500 dark:text-slate-500 truncate mt-1"
                   >
-                    "A revolução da IA está apenas começando. Descubra como as
-                    novas ferramentas estão..."
+                    {{ g.output_text|truncatechars:120 }}
                   </div>
                 </td>
+
                 <td class="px-6 py-4 text-right">
                   <button
+                    onclick="navigator.clipboard.writeText(`{{ g.output_text|escapejs }}`)"
                     class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
                   >
                     <span class="material-symbols-outlined text-sm"
@@ -178,167 +181,17 @@
                   </button>
                 </td>
               </tr>
-              <!-- Row 2 -->
-              <tr
-                class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group"
-              >
-                <td
-                  class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium"
-                >
-                  23/05/2024
-                </td>
-                <td class="px-6 py-4">
-                  <div
-                    class="flex items-center justify-center size-8 rounded-lg bg-emerald-100 dark:bg-emerald-900/30 text-emerald-600 dark:text-emerald-400"
-                  >
-                    <span class="material-symbols-outlined text-lg">code</span>
-                  </div>
-                </td>
-                <td class="px-6 py-4 max-w-md">
-                  <div
-                    class="text-sm text-slate-800 dark:text-slate-200 font-medium truncate"
-                  >
-                    Script Python para automação de dados
-                  </div>
-                  <div
-                    class="text-xs text-slate-500 dark:text-slate-500 truncate mt-1"
-                  >
-                    import pandas as pd \n df = pd.read_csv('vendas.csv')...
-                  </div>
-                </td>
-                <td class="px-6 py-4 text-right">
-                  <button
-                    class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
-                  >
-                    <span class="material-symbols-outlined text-sm"
-                      >content_copy</span
-                    >
-                    Copiar
-                  </button>
+
+              {% empty %}
+
+              <tr>
+                <td colspan="4" class="text-center py-10 text-slate-500">
+                  Nenhuma geração encontrada.
                 </td>
               </tr>
-              <!-- Row 3 -->
-              <tr
-                class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group"
-              >
-                <td
-                  class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium"
-                >
-                  22/05/2024
-                </td>
-                <td class="px-6 py-4">
-                  <div
-                    class="flex items-center justify-center size-8 rounded-lg bg-amber-100 dark:bg-amber-900/30 text-amber-600 dark:text-amber-400"
-                  >
-                    <span class="material-symbols-outlined text-lg">mail</span>
-                  </div>
-                </td>
-                <td class="px-6 py-4 max-w-md">
-                  <div
-                    class="text-sm text-slate-800 dark:text-slate-200 font-medium truncate"
-                  >
-                    E-mail de marketing para campanha de verão
-                  </div>
-                  <div
-                    class="text-xs text-slate-500 dark:text-slate-500 truncate mt-1"
-                  >
-                    Assunto: Ofertas imperdíveis chegaram com o sol! Olá [Nome],
-                    temos novidades...
-                  </div>
-                </td>
-                <td class="px-6 py-4 text-right">
-                  <button
-                    class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
-                  >
-                    <span class="material-symbols-outlined text-sm"
-                      >content_copy</span
-                    >
-                    Copiar
-                  </button>
-                </td>
-              </tr>
-              <!-- Row 4 -->
-              <tr
-                class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group"
-              >
-                <td
-                  class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium"
-                >
-                  22/05/2024
-                </td>
-                <td class="px-6 py-4">
-                  <div
-                    class="flex items-center justify-center size-8 rounded-lg bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400"
-                  >
-                    <span class="material-symbols-outlined text-lg">image</span>
-                  </div>
-                </td>
-                <td class="px-6 py-4 max-w-md">
-                  <div
-                    class="text-sm text-slate-800 dark:text-slate-200 font-medium truncate"
-                  >
-                    Prompt de Imagem: Paisagem Futurista
-                  </div>
-                  <div
-                    class="text-xs text-slate-500 dark:text-slate-500 truncate mt-1"
-                  >
-                    Cyberpunk city in neo-tokyo, raining, high detail, 8k,
-                    cinematic lighting...
-                  </div>
-                </td>
-                <td class="px-6 py-4 text-right">
-                  <button
-                    class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
-                  >
-                    <span class="material-symbols-outlined text-sm"
-                      >content_copy</span
-                    >
-                    Copiar
-                  </button>
-                </td>
-              </tr>
-              <!-- Row 5 -->
-              <tr
-                class="hover:bg-slate-50/50 dark:hover:bg-slate-800/30 transition-colors group"
-              >
-                <td
-                  class="px-6 py-4 text-sm text-slate-600 dark:text-slate-400 font-medium"
-                >
-                  21/05/2024
-                </td>
-                <td class="px-6 py-4">
-                  <div
-                    class="flex items-center justify-center size-8 rounded-lg bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400"
-                  >
-                    <span class="material-symbols-outlined text-lg"
-                      >description</span
-                    >
-                  </div>
-                </td>
-                <td class="px-6 py-4 max-w-md">
-                  <div
-                    class="text-sm text-slate-800 dark:text-slate-200 font-medium truncate"
-                  >
-                    Resumo de Reunião Trimestral
-                  </div>
-                  <div
-                    class="text-xs text-slate-500 dark:text-slate-500 truncate mt-1"
-                  >
-                    Pontos chave: Aumento de 20% no engajamento, novos desafios
-                    de logística...
-                  </div>
-                </td>
-                <td class="px-6 py-4 text-right">
-                  <button
-                    class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
-                  >
-                    <span class="material-symbols-outlined text-sm"
-                      >content_copy</span
-                    >
-                    Copiar
-                  </button>
-                </td>
-              </tr>
+
+              {% endfor %}
+
             </tbody>
           </table>
         </div>

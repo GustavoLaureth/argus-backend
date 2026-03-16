@@ -34,7 +34,7 @@
             class="w-full h-12 px-4 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800/50 text-slate-900 dark:text-white focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
             placeholder="Digite seu nome"
             type="text"
-            value="Teste"
+            value="{{ request.user.get_full_name }}"
           />
         </div>
         <div class="flex flex-col gap-2">
@@ -47,7 +47,7 @@
               class="w-full h-12 px-4 pr-12 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-100 dark:bg-slate-800 text-slate-500 dark:text-slate-400 cursor-not-allowed italic"
               disabled=""
               type="email"
-              value="teste@useargus.com.br"
+              value="{{ request.user.email }}"
             />
             <span
               class="material-symbols-outlined absolute right-4 text-slate-400 text-xl"

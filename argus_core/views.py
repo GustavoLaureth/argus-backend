@@ -1,21 +1,26 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from apps.ai.services import get_monthly_generations
+from apps.ai.limits import PLAN_LIMITS
+from apps.ai.models import Generation
 
 @login_required
 def dashboard(request):
-  return render(request, "pages/dashboard.html")
+  profile = request.user.userprofile
+  plan = profile.plan
+  limit = PLAN_LIMITS[plan]
+  usage = get_monthly_generations(request.user)
 
-@login_required
-def create(request):
-  return render(request, "pages/create.html")
+  recent_generations = Generation.objects.filter(
+    user=request.user
+  ).order_by("-created_at")[:5]
 
-@login_required
-def history(request):
-  return render(request, "pages/history.html")
-
-@login_required
-def subscription(request):
-  return render(request, "pages/subscription.html")
+  return render(request, "pages/dashboard.html", {
+    "plan": plan,
+    "limit": limit,
+    "usage": usage,
+    "recent_generations": recent_generations
+  })
 
 @login_required
 def profile(request):

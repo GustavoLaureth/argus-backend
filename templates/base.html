@@ -79,35 +79,35 @@
         </div>
         <nav class="flex-1 px-4 space-y-2 mt-4">
           <a
-            class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold"
+            class="{% if request.path == '/dashboard/' %}flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold{% else %}flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors{% endif %}"
             href={% url 'dashboard' %}
           >
             <span class="material-symbols-outlined">dashboard</span>
             <span>Dashboard</span>
           </a>
           <a
-            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            class="{% if request.path == '/create/' %}flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold{% else %}flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors{% endif %}"
             href={% url 'create' %}
           >
             <span class="material-symbols-outlined">edit_square</span>
             <span>Gerar Conteúdo</span>
           </a>
           <a
-            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            class="{% if request.path == '/history/' %}flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold{% else %}flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors{% endif %}"
             href={% url 'history' %}
           >
             <span class="material-symbols-outlined">history</span>
             <span>Histórico</span>
           </a>
           <a
-            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            class="{% if request.path == '/subscription/' %}flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold{% else %}flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors{% endif %}"
             href={% url 'subscription' %}
           >
             <span class="material-symbols-outlined">workspace_premium</span>
             <span>Planos</span>
           </a>
           <a
-            class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+            class="{% if request.path == '/profile/' %}flex items-center gap-3 px-3 py-2.5 rounded-lg bg-primary/10 text-primary font-semibold{% else %}flex items-center gap-3 px-3 py-2.5 rounded-lg text-slate-600 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors{% endif %}"
             href={% url 'profile' %}
           >
             <span class="material-symbols-outlined">person</span>

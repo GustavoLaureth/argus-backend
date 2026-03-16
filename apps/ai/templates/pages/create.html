@@ -1,0 +1,256 @@
+{% extends 'base.html' %} {% block content %}
+<!-- Main Content -->
+<main
+  class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark"
+>
+  <!-- Top Nav -->
+  <header
+    class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark/50 backdrop-blur-sm flex items-center justify-between px-8 sticky top-0 z-10"
+  >
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-slate-400">note_add</span>
+      <h2 class="text-lg font-semibold text-slate-800 dark:text-slate-100">
+        Gerar Conteúdo
+      </h2>
+    </div>
+    <div class="flex items-center gap-4">
+      <button
+        class="w-10 h-10 rounded-full border border-slate-200 dark:border-slate-700 flex items-center justify-center text-slate-500"
+      >
+        <span class="material-symbols-outlined">notifications</span>
+      </button>
+      <div
+        class="w-10 h-10 rounded-full bg-slate-200 dark:bg-slate-700 overflow-hidden"
+      >
+        <img
+          class="w-full h-full object-cover"
+          data-alt="User avatar male"
+          src="{{ request.user.socialaccount_set.all.0.extra_data.picture }}"
+        />
+      </div>
+    </div>
+  </header>
+  <div class="max-w-4xl mx-auto p-8">
+    <!-- Hero Header -->
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">
+        Criar Novo Conteúdo
+      </h1>
+      <p class="text-slate-500 dark:text-slate-400">
+        Transforme suas informações em textos otimizados em segundos usando
+        nossa IA avançada.
+      </p>
+    </div>
+
+    {% if error %}
+    <div class="bg-red-100 text-red-700 p-3 rounded mb-4">{{ error }}</div>
+    {% endif %}
+
+    <form method="POST">
+      {% csrf_token %}
+      <!-- Input Form Section -->
+      <div
+        class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden mb-8"
+      >
+        <div class="p-6 space-y-6">
+          <!-- Base Info -->
+          <div>
+            <label
+              class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2"
+              >Informação Base</label
+            >
+            <textarea
+              required
+              name="text"
+              class="w-full min-h-[160px] rounded-lg border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 text-slate-900 dark:text-slate-100 focus:border-primary focus:ring-1 focus:ring-primary p-4 resize-none placeholder:text-slate-400 dark:placeholder:text-slate-600"
+              placeholder="Digite ou cole os pontos principais, fatos ou informações brutas aqui..."
+            ></textarea>
+          </div>
+          <!-- Type Selection -->
+          <div>
+            <label
+              class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-3"
+            >
+              Tipo de Conteúdo
+            </label>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <!-- NOTÍCIA -->
+              <label class="cursor-pointer block relative">
+                <input
+                  type="radio"
+                  name="type"
+                  value="news"
+                  class="peer hidden"
+                />
+
+                <div
+                  class="relative flex items-center p-4 border rounded-lg border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/5"
+                >
+                  <span
+                    class="material-symbols-outlined text-slate-500 mr-3 peer-checked:text-primary"
+                  >
+                    newspaper
+                  </span>
+
+                  <span
+                    class="text-sm font-medium text-slate-900 dark:text-slate-100"
+                  >
+                    Notícia
+                  </span>
+                </div>
+              </label>
+
+              <!-- SOCIAL -->
+              <label class="cursor-pointer block relative">
+                <input
+                  type="radio"
+                  name="type"
+                  value="social"
+                  class="peer hidden"
+                />
+
+                <div
+                  class="relative flex items-center p-4 border rounded-lg border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/5"
+                >
+                  <span
+                    class="material-symbols-outlined text-slate-500 mr-3 peer-checked:text-primary"
+                  >
+                    share
+                  </span>
+
+                  <span
+                    class="text-sm font-medium text-slate-900 dark:text-slate-100"
+                  >
+                    Rede Social
+                  </span>
+                </div>
+              </label>
+
+              <!-- HEADLINE -->
+              <label class="cursor-pointer block relative">
+                <input
+                  type="radio"
+                  name="type"
+                  value="headline"
+                  class="peer hidden"
+                />
+
+                <div
+                  class="relative flex items-center p-4 border rounded-lg border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/5"
+                >
+                  <span
+                    class="material-symbols-outlined text-slate-500 mr-3 peer-checked:text-primary"
+                  >
+                    campaign
+                  </span>
+
+                  <span
+                    class="text-sm font-medium text-slate-900 dark:text-slate-100"
+                  >
+                    Título Chamativo
+                  </span>
+                </div>
+              </label>
+            </div>
+          </div>
+        </div>
+        <div
+          class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 border-t border-slate-200 dark:border-slate-800 flex justify-end"
+        >
+          <button
+            id="generateBtn"
+            type="submit"
+            class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-semibold flex items-center gap-2 transition-all shadow-md shadow-primary/20"
+          >
+            <span class="material-symbols-outlined text-xl">bolt</span>
+            <span id="btnText">Gerar conteúdo</span>
+
+            <svg
+              id="loadingSpinner"
+              class="animate-spin h-5 w-5 hidden"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <circle
+                class="opacity-25"
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="4"
+              ></circle>
+
+              <path
+                class="opacity-75"
+                fill="currentColor"
+                d="M4 12a8 8 0 018-8v8H4z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </form>
+    {% if result %}
+    <!-- Result Section -->
+    <div
+      class="bg-white dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 shadow-sm overflow-hidden border-l-4 border-l-primary"
+    >
+      <div class="p-6">
+        <div class="flex items-center justify-between mb-4">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary"
+              >auto_fix_high</span
+            >
+            <h3
+              class="text-sm font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400"
+            >
+              Resultado Gerado
+            </h3>
+          </div>
+          <div class="flex gap-2">
+            <button
+              class="flex items-center gap- text-sm font-medium text-primary hover:text-primary/80 transition-colors"
+            >
+              <span class="material-symbols-outlined text-lg"
+                >content_copy</span
+              >
+              Copiar
+            </button>
+          </div>
+        </div>
+        <div class="prose dark:prose-invert max-w-none">
+          <p
+            class="text-slate-800 dark:text-slate-200 leading-relaxed bg-slate-50 dark:bg-slate-950 p-6 rounded-lg border border-dashed border-slate-200 dark:border-slate-800"
+          >
+            {{ result }}
+          </p>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+    <!-- Footer spacing -->
+    <div class="py-10 text-center">
+      <p class="text-slate-400 text-sm">
+        © 2026 Argus AI. Tecnologia de processamento de linguagem natural de
+        ponta.
+      </p>
+    </div>
+  </div>
+</main>
+<script>
+  const form = document.querySelector("form");
+  const btn = document.getElementById("generateBtn");
+  const text = document.getElementById("btnText");
+  const spinner = document.getElementById("loadingSpinner");
+
+  form.addEventListener("submit", () => {
+    btn.disabled = true;
+
+    text.innerText = "Gerando...";
+
+    spinner.classList.remove("hidden");
+  });
+</script>
+{% endblock %}

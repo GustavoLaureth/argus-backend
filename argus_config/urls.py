@@ -19,6 +19,8 @@ from django.urls import path, include
 
 urlpatterns = [
     path('', include('argus_core.urls')),
+    path('', include("apps.ai.urls")),
+    path('', include("apps.users.urls")),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
 ]

@@ -1,6 +1,4 @@
-{% extends 'base.html' %}
-
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <!-- Main Content -->
 <main class="flex-1 flex flex-col min-w-0 overflow-y-auto">
   <!-- Topbar -->
@@ -38,9 +36,9 @@
         <div
           class="h-10 w-10 rounded-full bg-secondary bg-cover bg-center border-2 border-primary/10"
           data-alt="Avatar do usuário Lucas Silva"
-          style="
-            background-image: url(&quot;{{ request.user.socialaccount_set.all.0.extra_data.picture }}&quot;);
-          "
+          style='
+            background-image: url("{{ request.user.socialaccount_set.all.0.extra_data.picture }}");
+          '
         ></div>
       </div>
     </div>
@@ -59,6 +57,7 @@
         </p>
       </div>
       <button
+        onclick="window.location.href='{% url 'create' %}'"
         class="flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20"
       >
         <span class="material-symbols-outlined">add_circle</span>
@@ -85,7 +84,14 @@
           Gerações Restantes
         </p>
         <h3 class="text-3xl font-black mt-1">
-          42 <span class="text-lg font-normal text-slate-400">/ 100</span>
+          {% if usage >= limit %} {{ usage }}
+          <span class="text-lg font-normal text-slate-400">/ {{ limit }}</span>
+          <div class="text-red-500 text-sm mt-1">
+            Você atingiu o limite do plano.
+          </div>
+          {% else %} {{ usage }}
+          <span class="text-lg font-normal text-slate-400">/ {{ limit }}</span>
+          {% endif %}
         </h3>
       </div>
       <div
@@ -105,7 +111,9 @@
         <p class="text-slate-500 dark:text-slate-400 text-sm font-medium">
           Plano Atual
         </p>
-        <h3 class="text-3xl font-black mt-1 text-secondary">Creator</h3>
+        <h3 class="text-3xl font-black mt-1 text-secondary">
+          {{ plan|title }}
+        </h3>
       </div>
       <div
         class="bg-white dark:bg-slate-900 p-6 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm md:col-span-2 lg:col-span-1"
@@ -133,12 +141,15 @@
         class="px-6 py-5 border-b border-slate-200 dark:border-slate-800 flex items-center justify-between"
       >
         <h3 class="font-bold text-lg">Histórico Recente</h3>
-        <a class="text-primary text-sm font-semibold hover:underline" href="#"
+        <a
+          class="text-primary text-sm font-semibold hover:underline"
+          href="{% url 'history' %}"
           >Ver tudo</a
         >
       </div>
       <div class="divide-y divide-slate-100 dark:divide-slate-800">
-        <!-- History Item 1 -->
+        {% for g in recent_generations %}
+
         <div
           class="px-6 py-4 flex items-center justify-between hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors"
         >
@@ -146,32 +157,39 @@
             <div
               class="w-12 h-12 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center"
             >
-              <span class="material-symbols-outlined text-slate-500"
-                >article</span
-              >
+              <span class="material-symbols-outlined text-slate-500">
+                article
+              </span>
             </div>
+
             <div>
               <h4 class="font-bold text-slate-800 dark:text-slate-200">
-                Post de Blog: Futuro da IA
+                {{ g.output_text|truncatechars:60 }}
               </h4>
+
               <p class="text-xs text-slate-500">
-                Gerado há 2 horas • 1.2k palavras
+                {{ g.created_at|timesince }} atrás
               </p>
             </div>
           </div>
+
           <div class="flex items-center gap-2">
             <button
+              onclick="navigator.clipboard.writeText(`{{ g.output_text|escapejs }}`)"
               class="p-2 text-slate-400 hover:text-primary transition-colors"
             >
-              <span class="material-symbols-outlined text-xl">download</span>
-            </button>
-            <button
-              class="p-2 text-slate-400 hover:text-primary transition-colors"
-            >
-              <span class="material-symbols-outlined text-xl">more_vert</span>
+              <span class="material-symbols-outlined text-xl">
+                content_copy
+              </span>
             </button>
           </div>
         </div>
+
+        {% empty %}
+
+        <div class="p-6 text-sm text-slate-500">Nenhuma geração ainda.</div>
+
+        {% endfor %}
       </div>
     </div>
   </div>
