@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .services import generate_content, get_monthly_generations
+from .services import generate_content, get_monthly_generations, parse_news
 from .models import Generation
 from .limits import PLAN_LIMITS
 from django.contrib.auth.decorators import login_required
@@ -9,6 +9,10 @@ def create(request):
 
     result = None
     error = None
+
+    title = None
+    subtitle = None
+    body = None
 
     if request.method == "POST":
         text = request.POST.get("text")
@@ -27,6 +31,14 @@ def create(request):
         else:
             # gerar conteúdo com IA
             result = generate_content(text, content_type)
+
+            if content_type == "news":
+                title, subtitle, body = parse_news(result)
+
+                if not title:
+
+                    body = result.split("\n")
+
             # salvar no banco
             Generation.objects.create(
                 user=request.user,
@@ -37,7 +49,10 @@ def create(request):
 
     return render(request, "pages/create.html", {
         "result": result,
-        "error": error
+        "error": error,
+        "title": title,
+        "subtitle": subtitle,
+        "body": body
     })
 
 @login_required

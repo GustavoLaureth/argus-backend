@@ -9,6 +9,7 @@ from django.shortcuts import redirect
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -18,6 +19,18 @@ PLAN_ORDER = {
     "creator": 2,
     "pro": 3,
 }
+
+def billing_portal(request):
+
+    profile = request.user.userprofile
+
+    session = stripe.billing_portal.Session.create(
+        customer=profile.stripe_customer_id,
+
+        return_url=request.build_absolute_uri("/subscription/")
+    )
+
+    return redirect(session.url)
 
 @csrf_exempt
 def stripe_webhook(request):
@@ -42,16 +55,20 @@ def stripe_webhook(request):
 
         session = event["data"]["object"]
 
-        customer_email = session["customer_email"]
+        customer_id = session["customer"]
+
+        subscription_id = session["subscription"]
 
         plan = session["metadata"]["plan"]
 
-        from django.contrib.auth.models import User
+        from apps.users.models import UserProfile
 
-        user = User.objects.get(email=customer_email)
+        profile = UserProfile.objects.get(
+            stripe_customer_id=customer_id
+        )
 
-        profile = user.userprofile
         profile.plan = plan
+        profile.stripe_subscription_id = subscription_id
         profile.save()
 
     return HttpResponse(status=200)
@@ -126,3 +143,34 @@ def payment_success(request, plan):
     profile.save()
 
     return redirect("dashboard")
+
+def change_plan(request, new_plan):
+
+    profile = request.user.userprofile
+    subscription_id = profile.stripe_subscription_id
+
+    price_id = settings.STRIPE_PRICES[new_plan]
+
+    subscription = stripe.Subscription.retrieve(subscription_id)
+
+    current_price = subscription["items"]["data"][0]["price"]["id"]
+
+    stripe.Subscription.modify(
+        subscription_id,
+
+        items=[{
+            "id": subscription["items"]["data"][0].id,
+            "price": price_id
+        }],
+
+        proration_behavior="none",
+
+        billing_cycle_anchor="unchanged"
+    )
+
+    return redirect("subscription")
+
+
+@login_required
+def profile(request):
+  return render(request, "pages/profile.html")

@@ -11,6 +11,8 @@ def dashboard(request):
   limit = PLAN_LIMITS[plan]
   usage = get_monthly_generations(request.user)
 
+  percentage = int((usage / limit) * 100)
+
   recent_generations = Generation.objects.filter(
     user=request.user
   ).order_by("-created_at")[:5]
@@ -19,9 +21,6 @@ def dashboard(request):
     "plan": plan,
     "limit": limit,
     "usage": usage,
+    "percentage": percentage,
     "recent_generations": recent_generations
   })
-
-@login_required
-def profile(request):
-  return render(request, "pages/profile.html")

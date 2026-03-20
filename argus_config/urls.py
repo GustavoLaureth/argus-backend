@@ -21,6 +21,7 @@ urlpatterns = [
     path('', include('argus_core.urls')),
     path('', include("apps.ai.urls")),
     path('', include("apps.users.urls")),
+    path('', include("apps.news.urls")),
     path('accounts/', include('allauth.urls')),
     path('admin/', admin.site.urls),
 ]
