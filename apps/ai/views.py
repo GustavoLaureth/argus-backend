@@ -67,6 +67,14 @@ def history(request):
     page_number = request.GET.get('page')
     generations = paginator.get_page(page_number)
 
+    for g in generations:
+        if g.content_type == "news":
+            title, subtitle, body = parse_news(g.output_text)
+
+            g.title = title
+            g.subtitle = subtitle
+            g.body = body
+
     return render(request, "pages/history.html", {
         "generations": generations
     })
