@@ -33,13 +33,6 @@ def fetch_gnews():
                 published_at=article["publishedAt"]
             )
 
-    old_news = NewsArticle.objects.filter(
-      published_at__lt=timezone.now() - timedelta(days=2)
-    )
-
-    deleted_count = old_news.count()
-    old_news.delete()
-
 def search_news(query):
 
     words = query.lower().split()

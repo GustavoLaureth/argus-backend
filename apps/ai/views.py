@@ -3,6 +3,7 @@ from .services import generate_content, get_monthly_generations, parse_news
 from .models import Generation
 from .limits import PLAN_LIMITS
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator
 
 @login_required
 def create(request):
@@ -61,6 +62,10 @@ def history(request):
     generations = Generation.objects.filter(
         user=request.user
     ).order_by("-created_at")
+
+    paginator = Paginator(generations, 10)
+    page_number = request.GET.get('page')
+    generations = paginator.get_page(page_number)
 
     return render(request, "pages/history.html", {
         "generations": generations

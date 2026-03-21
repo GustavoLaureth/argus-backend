@@ -191,7 +191,6 @@
               </tr>
 
               {% endfor %}
-
             </tbody>
           </table>
         </div>
@@ -199,39 +198,56 @@
         <div
           class="px-6 py-4 bg-slate-50 dark:bg-slate-800/50 flex items-center justify-between border-t border-slate-200 dark:border-slate-800"
         >
-          <span class="text-xs text-slate-500 dark:text-slate-400"
-            >Mostrando 1-5 de 24 gerações</span
-          >
+          <span class="text-xs text-slate-500 dark:text-slate-400">
+            Mostrando {{ generations.start_index }}-{{ generations.end_index }}
+            de {{ generations.paginator.count }} gerações
+          </span>
+
           <div class="flex items-center gap-2">
-            <button
-              class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"
+            <!-- FIRST -->
+            {% if generations.number > 3 %}
+              <a
+                href="?page=1"
+                class="size-8 flex items-center justify-center border rounded text-xs"
+                >1</a>
+            {% if generations.number > 4 %}
+              <span class="px-1 text-slate-400">...</span>
+            {% endif %}
+            {% endif %}
+
+            <!-- MIDDLE -->
+            {% for num in generations.paginator.page_range %}
+              {% if num >= generations.number|add:-2 and num <= generations.number|add:2 %} 
+                {% if generations.number == num %}
+                  <span
+                    class="size-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold"
+                  >
+                    {{ num }}
+                  </span>
+                {% else %}
+                  <a
+                    href="?page={{ num }}"
+                    class="size-8 flex items-center justify-center rounded border text-xs hover:bg-slate-100"
+                  >
+                    {{ num }}
+                  </a>
+                {% endif %} 
+              {% endif %}
+            {% endfor %}
+
+            <!-- LAST -->
+            {% if generations.number < generations.paginator.num_pages|add:-2 %}
+            {% if generations.number < generations.paginator.num_pages|add:-3 %}
+            <span class="px-1 text-slate-400">...</span>
+            {% endif %}
+
+            <a
+              href="?page={{ generations.paginator.num_pages }}"
+              class="size-8 flex items-center justify-center border rounded text-xs"
             >
-              <span class="material-symbols-outlined text-lg"
-                >chevron_left</span
-              >
-            </button>
-            <button
-              class="size-8 flex items-center justify-center rounded bg-primary text-white font-bold text-xs"
-            >
-              1
-            </button>
-            <button
-              class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-medium"
-            >
-              2
-            </button>
-            <button
-              class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800 text-xs font-medium"
-            >
-              3
-            </button>
-            <button
-              class="size-8 flex items-center justify-center rounded border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"
-            >
-              <span class="material-symbols-outlined text-lg"
-                >chevron_right</span
-              >
-            </button>
+              {{ generations.paginator.num_pages }}
+            </a>
+            {% endif %}
           </div>
         </div>
       </div>

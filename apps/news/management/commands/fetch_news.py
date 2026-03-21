@@ -8,15 +8,17 @@ class Command(BaseCommand):
     help = "Fetch news from GNews"
 
     def handle(self, *args, **kwargs):
-        # 🔥 1. limpar notícias antigas (6 meses)
+
+        # 🔥 limpar notícias antigas (1 ano baseado no banco)
         cutoff_date = timezone.now() - timedelta(days=365)
 
         deleted, _ = NewsArticle.objects.filter(
-            published_at__lt=cutoff_date
+            created_at__lt=cutoff_date
         ).delete()
 
         print(f"🧹 Removidas {deleted} notícias antigas")
 
-        # 🔥 2. buscar novas notícias (seu código atual)
+        # 🔥 buscar novas notícias
         fetch_gnews()
+
         self.stdout.write("News updated")
