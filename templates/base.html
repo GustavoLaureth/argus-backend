@@ -1,9 +1,11 @@
+{% load static %}
 <!doctype html>
 
 <html class="light" lang="pt-br">
   <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <link rel="shortcut icon" href="{% static 'logo/favicon.png' %}" type="image/x-icon">
     <title>Argus AI</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Figtree:ital,wght@0,300..900;1,300..900&display=swap" rel="stylesheet">
@@ -64,17 +66,14 @@
       >
         <div class="p-6 flex items-center gap-3">
           <div
-            class="size-10 rounded-lg bg-primary flex items-center justify-center text-white"
+            class="size-10 rounded-lg bg-[#0b2643] flex items-center justify-center text-white"
           >
-            <span class="material-symbols-outlined text-2xl">monitoring</span>
+            <img class="rounded-lg size-10 p-1" src="{% static 'logo/logo.jpeg' %}" alt="">
           </div>
           <div>
-            <h1 class="text-xl font-black tracking-tight text-primary">
+            <h1 class="text-xl font-black tracking-tight text-[#0b2643]">
               Argus AI
             </h1>
-            <p class="text-xs text-slate-500 dark:text-slate-400 font-medium">
-              Inteligência Artificial
-            </p>
           </div>
         </div>
         <nav class="flex-1 px-4 space-y-2 mt-4">
