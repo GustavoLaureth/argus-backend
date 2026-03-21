@@ -7,15 +7,19 @@
   >
     <div class="flex-1 max-w-md">
       <div class="relative group">
-        <span
-          class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"
-          >search</span
-        >
-        <input
-          class="w-full bg-slate-100 dark:bg-slate-900 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 transition-all"
-          placeholder="Pesquisar no histórico..."
-          type="text"
-        />
+        <form method="get" class="relative group">
+          <span
+            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-sm"
+            >search</span
+          >
+          <input
+            class="w-full bg-slate-100 dark:bg-slate-900 border-none rounded-lg pl-10 pr-4 py-2 text-sm focus:ring-2 focus:ring-primary/50 transition-all"
+            placeholder="Pesquisar no histórico..."
+            type="text"
+            name="search"
+            value="{{ search }}"
+          />
+        </form>
       </div>
     </div>
     <div class="flex items-center gap-4">
@@ -70,37 +74,48 @@
       </div>
       <!-- Filters -->
       <div class="flex flex-wrap items-center gap-3">
-        <button
-          class="bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold"
+        <a href="?"
+          class="{% if not selected_types or 'all' in selected_types %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
         >
           Todos
-        </button>
-        <button
-          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1"
+        </a>
+        <a href="?{% for t in selected_types %}{% if t != 'news' %}type={{ t }}&{% endif %}{% endfor %}type=news&period={{ selected_period }}"
+          class="{% if 'news' in selected_types %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
         >
-          <span class="material-symbols-outlined text-sm">article</span>
-          Texto
-        </button>
-        <button
-          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1"
+          <span class="material-symbols-outlined text-sm">newspaper</span>
+          Notícias
+        </a>
+        <a href="?{% for t in selected_types %}{% if t != 'social' %}type={{ t }}&{% endif %}{% endfor %}type=social&period={{ selected_period }}"
+          class="{% if 'social' in selected_types %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
         >
-          <span class="material-symbols-outlined text-sm">code</span>
-          Código
-        </button>
-        <button
-          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1"
+          <span class="material-symbols-outlined text-sm">share</span>
+          Redes Sociais
+        </a>
+        <a href="?{% for t in selected_types %}{% if t != 'headline' %}type={{ t }}&{% endif %}{% endfor %}type=headline&period={{ selected_period }}"
+          class="{% if 'headline' in selected_types %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
         >
-          <span class="material-symbols-outlined text-sm">image</span>
-          Imagens
-        </button>
+          <span class="material-symbols-outlined text-sm">campaign</span>
+          Títulos
+        </a>
         <div class="h-4 w-[1px] bg-slate-300 dark:bg-slate-700 mx-2"></div>
-        <button
-          class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1"
+        <a href="?{% for t in selected_types %}type={{ t }}&{% endfor %}period=7"
+          class="{% if selected_period == '7' %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
+        >
+          <span class="material-symbols-outlined text-sm">calendar_today</span>
+          Últimos 7 dias
+        </a>
+        <a href="?{% for t in selected_types %}type={{ t }}&{% endfor %}period=30"
+          class="{% if selected_period == '30' %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
         >
           <span class="material-symbols-outlined text-sm">calendar_today</span>
           Últimos 30 dias
-          <span class="material-symbols-outlined text-sm">expand_more</span>
-        </button>
+        </a>
+        <a href="?{% for t in selected_types %}type={{ t }}&{% endfor %}period=90"
+          class="{% if selected_period == '90' %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
+        >
+          <span class="material-symbols-outlined text-sm">calendar_today</span>
+          Últimos 90 dias
+        </a>
       </div>
       <!-- History Table -->
       <div
@@ -248,48 +263,18 @@
 
           <div class="flex items-center gap-2">
             <!-- FIRST -->
-            {% if generations.number > 3 %}
-              <a
-                href="?page=1"
-                class="size-8 flex items-center justify-center border rounded text-xs"
-                >1</a>
-            {% if generations.number > 4 %}
-              <span class="px-1 text-slate-400">...</span>
-            {% endif %}
+            {% if generations.has_previous %}
+              <a href="?{{ query_params }}&page=1">&laquo; Primeira</a>
+              <a href="?{{ query_params }}&page={{ generations.previous_page_number }}">Anterior</a>
             {% endif %}
 
-            <!-- MIDDLE -->
-            {% for num in generations.paginator.page_range %}
-              {% if num >= generations.number|add:-2 and num <= generations.number|add:2 %} 
-                {% if generations.number == num %}
-                  <span
-                    class="size-8 flex items-center justify-center rounded bg-primary text-white text-xs font-bold"
-                  >
-                    {{ num }}
-                  </span>
-                {% else %}
-                  <a
-                    href="?page={{ num }}"
-                    class="size-8 flex items-center justify-center rounded border text-xs hover:bg-slate-100"
-                  >
-                    {{ num }}
-                  </a>
-                {% endif %} 
-              {% endif %}
-            {% endfor %}
+              <span>
+                Página {{ generations.number }} de {{ generations.paginator.num_pages }}
+              </span>
 
-            <!-- LAST -->
-            {% if generations.number < generations.paginator.num_pages|add:-2 %}
-            {% if generations.number < generations.paginator.num_pages|add:-3 %}
-            <span class="px-1 text-slate-400">...</span>
-            {% endif %}
-
-            <a
-              href="?page={{ generations.paginator.num_pages }}"
-              class="size-8 flex items-center justify-center border rounded text-xs"
-            >
-              {{ generations.paginator.num_pages }}
-            </a>
+            {% if generations.has_next %}
+              <a href="?{{ query_params }}&page={{ generations.next_page_number }}">Próxima</a>
+              <a href="?{{ query_params }}&page={{ generations.paginator.num_pages }}">Última &raquo;</a>
             {% endif %}
           </div>
         </div>

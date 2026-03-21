@@ -4,6 +4,10 @@ from .models import Generation
 from .limits import PLAN_LIMITS
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator
+from django.db.models import Q
+from datetime import timedelta
+from django.utils import timezone
+from urllib.parse import urlencode
 
 @login_required
 def create(request):
@@ -63,6 +67,36 @@ def history(request):
         user=request.user
     ).order_by("-created_at")
 
+    query_params = request.GET.copy()
+
+    if "page" in query_params:
+        query_params.pop("page")
+
+    search = request.GET.get("search", "").strip()
+    if search:
+        generations = generations.filter(
+            Q(input_text__icontains=search) |
+            Q(output_text__icontains=search)
+        )
+    
+    types = request.GET.getlist("type")
+    if types and "all" not in types:
+        generations = generations.filter(content_type__in=types)
+
+    # 📅 período
+    period = request.GET.get("period")
+    if period:
+        now = timezone.now()
+
+        if period == "7":
+            generations = generations.filter(created_at__gte=now - timedelta(days=7))
+
+        elif period == "30":
+            generations = generations.filter(created_at__gte=now - timedelta(days=30))
+
+        elif period == "90":
+            generations = generations.filter(created_at__gte=now - timedelta(days=90))
+
     paginator = Paginator(generations, 10)
     page_number = request.GET.get('page')
     generations = paginator.get_page(page_number)
@@ -76,5 +110,9 @@ def history(request):
             g.body = body
 
     return render(request, "pages/history.html", {
-        "generations": generations
+        "generations": generations,
+        "search": search,
+        "selected_types": types,
+        "selected_period": period,
+        "query_params": urlencode(query_params)
     })
