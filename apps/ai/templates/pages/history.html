@@ -79,19 +79,19 @@
         >
           Todos
         </a>
-        <a href="?{% for t in selected_types %}{% if t != 'news' %}type={{ t }}&{% endif %}{% endfor %}type=news&period={{ selected_period }}"
+        <a href="?{% if 'news' in selected_types %}{% for t in selected_types %}{% if t != 'news' %}type={{ t }}&{% endif %}{% endfor %}{% else %}{% for t in selected_types %}type={{ t }}&{% endfor %}type=news&{% endif %}period={{ selected_period }}"
           class="{% if 'news' in selected_types %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
         >
           <span class="material-symbols-outlined text-sm">newspaper</span>
           Notícias
         </a>
-        <a href="?{% for t in selected_types %}{% if t != 'social' %}type={{ t }}&{% endif %}{% endfor %}type=social&period={{ selected_period }}"
+        <a href="?{% if 'social' in selected_types %}{% for t in selected_types %}{% if t != 'social' %}type={{ t }}&{% endif %}{% endfor %}{% else %}{% for t in selected_types %}type={{ t }}&{% endfor %}type=social&{% endif %}period={{ selected_period }}"
           class="{% if 'social' in selected_types %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
         >
           <span class="material-symbols-outlined text-sm">share</span>
           Redes Sociais
         </a>
-        <a href="?{% for t in selected_types %}{% if t != 'headline' %}type={{ t }}&{% endif %}{% endfor %}type=headline&period={{ selected_period }}"
+        <a href="?{% if 'headline' in selected_types %}{% for t in selected_types %}{% if t != 'headline' %}type={{ t }}&{% endif %}{% endfor %}{% else %}{% for t in selected_types %}type={{ t }}&{% endfor %}type=headline&{% endif %}period={{ selected_period }}"
           class="{% if 'headline' in selected_types %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
         >
           <span class="material-symbols-outlined text-sm">campaign</span>
