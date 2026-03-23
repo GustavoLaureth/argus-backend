@@ -187,7 +187,7 @@
 
                 <td class="px-6 py-4 text-right">
                   <button
-                    onclick="navigator.clipboard.writeText(`{{ g.output_text|escapejs }}`)"
+                    onclick="copyToClipboard(`{{ g.output_text|escapejs }}`)"
                     class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1.5 rounded-lg text-xs font-bold hover:bg-primary hover:text-white transition-all"
                   >
                     <span class="material-symbols-outlined text-sm"
@@ -282,6 +282,32 @@
     </div>
   </div>
 </main>
+
+<div id="toast"
+  class="fixed bottom-6 right-6 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20 opacity-0 pointer-events-none duration-300">
+  Copiado com sucesso
+</div>
+
+<script>
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast("Copiado com sucesso");
+  });
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.innerText = message;
+
+  toast.classList.remove("opacity-0", "pointer-events-none");
+  toast.classList.add("opacity-100");
+
+  setTimeout(() => {
+    toast.classList.remove("opacity-100");
+    toast.classList.add("opacity-0", "pointer-events-none");
+  }, 2000);
+}
+</script>
 
 <script>
 function openModal(id) {

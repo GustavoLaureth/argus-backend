@@ -211,6 +211,7 @@
           </div>
           <div class="flex gap-2">
             <button
+              onclick="copyToClipboard(`{{ result|escapejs }}`)"
               class="flex items-center gap- text-sm font-medium text-primary hover:text-primary/80 transition-colors"
             >
               <span class="material-symbols-outlined text-lg"
@@ -257,6 +258,60 @@
     </div>
   </div>
 </main>
+
+<div id="upgradeModal"
+  class="fixed inset-0 bg-black/50 hidden items-center justify-center z-50">
+
+  <div class="bg-white dark:bg-slate-900 rounded-xl p-6 max-w-md w-full text-center">
+
+    <h2 class="text-xl font-bold mb-2">
+      🚀 Limite atingido
+    </h2>
+
+    <p class="text-sm text-slate-500 mb-4">
+      Você atingiu o limite do seu plano.
+      Faça upgrade para continuar criando sem limites.
+    </p>
+
+    <a href="{% url 'subscription' %}"
+      class="bg-primary text-white px-4 py-2 rounded-lg font-semibold">
+      Fazer upgrade
+    </a>
+
+    <button onclick="closeUpgradeModal()"
+      class="block mt-3 text-sm text-slate-400">
+      Agora não
+    </button>
+
+  </div>
+</div>
+
+<div id="toast"
+  class="fixed bottom-6 right-6 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20 opacity-0 pointer-events-none duration-300">
+  Copiado com sucesso
+</div>
+
+<script>
+function copyToClipboard(text) {
+  navigator.clipboard.writeText(text).then(() => {
+    showToast("Copiado com sucesso");
+  });
+}
+
+function showToast(message) {
+  const toast = document.getElementById("toast");
+  toast.innerText = message;
+
+  toast.classList.remove("opacity-0", "pointer-events-none");
+  toast.classList.add("opacity-100");
+
+  setTimeout(() => {
+    toast.classList.remove("opacity-100");
+    toast.classList.add("opacity-0", "pointer-events-none");
+  }, 2000);
+}
+</script>
+
 <script>
   const form = document.querySelector("form");
   const btn = document.getElementById("generateBtn");
@@ -271,4 +326,25 @@
     spinner.classList.remove("hidden");
   });
 </script>
+
+<script>
+function openUpgradeModal() {
+  const modal = document.getElementById("upgradeModal");
+  modal.classList.remove("hidden");
+  modal.classList.add("flex");
+}
+
+function closeUpgradeModal() {
+  const modal = document.getElementById("upgradeModal");
+  modal.classList.add("hidden");
+  modal.classList.remove("flex");
+}
+</script>
+
+{% if error == "Você atingiu o limite do seu plano." %}
+<script>
+  openUpgradeModal();
+</script>
+{% endif %}
+
 {% endblock %}

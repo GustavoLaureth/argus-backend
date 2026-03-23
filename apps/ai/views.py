@@ -57,7 +57,8 @@ def create(request):
         "error": error,
         "title": title,
         "subtitle": subtitle,
-        "body": body
+        "body": body,
+        "error": error
     })
 
 @login_required
