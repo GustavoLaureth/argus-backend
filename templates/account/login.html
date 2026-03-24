@@ -1,3 +1,5 @@
+{% load static %}
+
 <!doctype html>
 <html lang="pt-br">
   <head>
@@ -46,53 +48,246 @@
       body {
         font-family: "Figtree", sans-serif;
       }
+
+      @keyframes scroll {
+        0% {
+          transform: translateX(0%);
+        }
+        100% {
+          transform: translateX(-50%);
+        }
+      }
+
+      @keyframes scroll-reverse {
+        0% {
+          transform: translateX(-50%);
+        }
+        100% {
+          transform: translateX(0%);
+        }
+      }
+
+      .animate-scroll {
+        animation: scroll 6s linear infinite alternate;
+      }
+
+      .animate-scroll-reverse {
+        animation: scroll-reverse 6s linear infinite alternate;
+      }
+
     </style>
   </head>
   <body
-    class="bg-background-light dark:bg-background-dark min-h-screen flex items-center justify-center"
+    class="bg-background-light dark:bg-background-dark"
   >
-      <div class="flex items-center justify-center p-6">
-        <div class="w-full max-w-md">
-          <h2 class="text-[48px] font-bold mb-8">Boas vindas a <br>
-            <span class="text-primary">Argus AI.</span></h2>
+    <div class="flex w-full h-screen overflow-hidden fixed inset-0">
+      <div class="flex flex-col w-full lg:w-1/2 p-6 justify-center h-full items-center">
+        <div class="relative w-full md:w-2/3">
+          <div class="w-full flex flex-col items-center justify-center p-8 rounded-3xl">
+            <div class="max-w-[480px] flex flex-col gap-8">
+              <h1 class="text-[36px] md:text-[48px] font-semibold leading-[105%] text-[#204749] tracking-tight">Boas vindas a <br>
+                <span class="text-primary">Argus AI.</span></h1>
+    
+                <p class="text-lg text-[#4c5267]">Teste gratuitamente entrando com a sua conta Google para começar a aproveitar nossa plataforma.</p>
+    
+                {% load socialaccount %}
+                <button
+                  onclick="location.href='{% provider_login_url 'google' %}'"
+                  class="w-full h-14 flex items-center justify-center gap-2 bg-white dark:bg-slate-800 border border-b-[3px] hover:border-b cursor-pointer border-black text-black dark:border-slate-700 dark:text-slate-200 px-4 rounded-lg hover:bg-white dark:hover:bg-slate-700 transition-all duration-100"
+                  type="button"
+                >
+                  <svg
+                    width="48"
+                    height="48"
+                    viewBox="0 0 48 48"
+                    class="w-5"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M43.611 20.083H42V20H24V28H35.303C33.654 32.657 29.223 36 24 36C17.373 36 12 30.627 12 24C12 17.373 17.373 12 24 12C27.059 12 29.842 13.154 31.961 15.039L37.618 9.382C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24C4 35.045 12.955 44 24 44C35.045 44 44 35.045 44 24C44 22.659 43.862 21.35 43.611 20.083Z"
+                      fill="#FFC107"
+                    ></path>
+                    <path
+                      d="M6.30603 14.691L12.877 19.51C14.655 15.108 18.961 12 24 12C27.059 12 29.842 13.154 31.961 15.039L37.618 9.382C34.046 6.053 29.268 4 24 4C16.318 4 9.65603 8.337 6.30603 14.691Z"
+                      fill="#FF3D00"
+                    ></path>
+                    <path
+                      d="M23.9999 44C29.1659 44 33.8599 42.023 37.4089 38.808L31.2189 33.57C29.1438 35.149 26.6075 36.0028 23.9999 36C18.7979 36 14.3809 32.683 12.7169 28.054L6.19495 33.079C9.50495 39.556 16.2269 44 23.9999 44Z"
+                      fill="#4CAF50"
+                    ></path>
+                    <path
+                      d="M43.611 20.083H42V20H24V28H35.303C34.5142 30.2164 33.0934 32.1532 31.216 33.571L31.219 33.569L37.409 38.807C36.971 39.205 44 34 44 24C44 22.659 43.862 21.35 43.611 20.083Z"
+                      fill="#1976D2"
+                    ></path>
+                  </svg>
+                  Entrar com o Google
+                </button>
+                <p class="text-lg text-[#4c5267]">Criando uma conta, você concorda com todos os nossos termos e condições.</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-            <p class="mb-8 text-lg">Teste gratuitamente entrando com a sua conta Google para começar a aproveitar nossa plataforma.</p>
-
-            {% load socialaccount %}
-            <button
-              onclick="location.href='{% provider_login_url 'google' %}'"
-              class="w-full h-12 flex items-center justify-center gap-3 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-medium py-3 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-700 transition-all"
-              type="button"
-            >
-              <svg
-                width="48"
-                height="48"
-                viewBox="0 0 48 48"
-                class="w-5"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M43.611 20.083H42V20H24V28H35.303C33.654 32.657 29.223 36 24 36C17.373 36 12 30.627 12 24C12 17.373 17.373 12 24 12C27.059 12 29.842 13.154 31.961 15.039L37.618 9.382C34.046 6.053 29.268 4 24 4C12.955 4 4 12.955 4 24C4 35.045 12.955 44 24 44C35.045 44 44 35.045 44 24C44 22.659 43.862 21.35 43.611 20.083Z"
-                  fill="#FFC107"
-                ></path>
-                <path
-                  d="M6.30603 14.691L12.877 19.51C14.655 15.108 18.961 12 24 12C27.059 12 29.842 13.154 31.961 15.039L37.618 9.382C34.046 6.053 29.268 4 24 4C16.318 4 9.65603 8.337 6.30603 14.691Z"
-                  fill="#FF3D00"
-                ></path>
-                <path
-                  d="M23.9999 44C29.1659 44 33.8599 42.023 37.4089 38.808L31.2189 33.57C29.1438 35.149 26.6075 36.0028 23.9999 36C18.7979 36 14.3809 32.683 12.7169 28.054L6.19495 33.079C9.50495 39.556 16.2269 44 23.9999 44Z"
-                  fill="#4CAF50"
-                ></path>
-                <path
-                  d="M43.611 20.083H42V20H24V28H35.303C34.5142 30.2164 33.0934 32.1532 31.216 33.571L31.219 33.569L37.409 38.807C36.971 39.205 44 34 44 24C44 22.659 43.862 21.35 43.611 20.083Z"
-                  fill="#1976D2"
-                ></path>
-              </svg>
-              Entrar com o Google
-            </button>
+      <div class="hidden lg:flex lg:w-1/2">
+        <div class="w-full relative border-2 border-[#e2e7f1] rounded-2xl m-12 overflow-hidden" style="background-image: url({% static 'img/bg-login.jpg' %}); background-size: cover; background-position: center center; background-repeat: no-repeat;">
+          <div class="relative w-full flex flex-col items-center justify-center h-full">
+            <div class="w-full overflow-hidden p-8 flex flex-col gap-8">
+              <div class="flex items-center gap-4 animate-scroll">
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 animate-scroll-reverse">
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+              </div>
+              <div class="flex items-center gap-4 animate-scroll">
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+                <div class="bg-white rounded-2xl shrink-0 w-[280px] md:w-[320px] lg:w-[360px] flex flex-col gap-4 p-2 md:p-3 lg:p-5 border border-white/10 shadow-2xl">
+                  <span class="material-symbols-outlined text-primary rotate-180 w-6">format_quote</span>
+                  <p class="text-lg text-bold">Their ability to capture our brand<br>
+                    essence in every project is<br>
+                    unparalleled - an invaluable creative<br>
+                    collaborator.
+                  </p>
+                  <div class="flex gap-2 align-items-center">
+                    <span class="material-symbols-outlined text-primary">account_circle</span>
+                    <p class="text-sm text-gray-500">Isabella Rodriguez</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
+
   </body>
 </html>
