@@ -4,5 +4,6 @@ from . import views
 
 urlpatterns = [
   path("", RedirectView.as_view(pattern_name="dashboard", permanent=False)),
-  path("dashboard/", views.dashboard, name="dashboard")
+  path("dashboard/", views.dashboard, name="dashboard"),
+  path("admin-dashboard/", views.admin_dashboard, name="admin_dashboard"),
 ]

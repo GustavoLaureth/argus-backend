@@ -21,6 +21,9 @@ class UserProfile(models.Model):
         default="free"
     )
 
+    limit_reached = models.BooleanField(default=False)
+    last_generation_at = models.DateTimeField(null=True, blank=True)
+
     stripe_customer_id = models.CharField(
         max_length=255,
         blank=True,

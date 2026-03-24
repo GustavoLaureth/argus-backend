@@ -32,8 +32,13 @@ def create(request):
 
         # verificar limite
         if limit and usage >= limit:
+            profile.limit_reached = True
+            profile.save()
             error = "Você atingiu o limite do seu plano."
         else:
+            profile.last_generation_at = timezone.now()
+            profile.limit_reached = False
+            profile.save()
             # gerar conteúdo com IA
             result = generate_content(text, content_type)
 
