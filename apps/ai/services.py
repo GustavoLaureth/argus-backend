@@ -4,6 +4,7 @@ from django.utils import timezone
 from datetime import date
 from .models import Generation
 from apps.news.services import search_news, build_context
+from apps.users.services import get_current_cycle
 
 today = date.today().strftime('%d/%m/%Y')
 
@@ -11,12 +12,12 @@ client = OpenAI(api_key=settings.OPENAI_API_KEY)
 
 def get_monthly_generations(user):
 
-    now = timezone.now()
+    cycle_start, cycle_end = get_current_cycle(user.userprofile)
 
     return Generation.objects.filter(
         user=user,
-        created_at__year=now.year,
-        created_at__month=now.month
+        created_at__gte=cycle_start,
+        created_at__lt=cycle_end
     ).count()
 
 def generate_content(text, content_type):

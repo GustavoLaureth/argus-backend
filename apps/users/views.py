@@ -10,6 +10,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
+from apps.users.services import get_next_reset_date
+from django.utils import timezone
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 
@@ -115,24 +117,27 @@ def create_checkout_session(request, plan):
     return redirect(session.url)
 
 def subscription(request):
-  profile = request.user.userprofile
-  plan = profile.plan
+    profile = request.user.userprofile
+    plan = profile.plan
 
-  limit = PLAN_LIMITS[plan]
-  usage = get_monthly_generations(request.user)
+    limit = PLAN_LIMITS[plan]
+    usage = get_monthly_generations(request.user)
 
-  percentage = int((usage / limit) * 100)
+    percentage = int((usage / limit) * 100)
 
-  current_plan_level = PLAN_ORDER[plan]
+    current_plan_level = PLAN_ORDER[plan]
 
-  return render(request, "pages/subscription.html", {
-    "plan": plan,
-    "limit": limit,
-    "usage": usage,
-    "percentage": percentage,
-    "current_plan_level": current_plan_level,
-    "plan_order": PLAN_ORDER
-  })
+    next_reset = get_next_reset_date(request.user.userprofile)
+    
+    return render(request, "pages/subscription.html", {
+        "plan": plan,
+        "limit": limit,
+        "usage": usage,
+        "percentage": percentage,
+        "current_plan_level": current_plan_level,
+        "plan_order": PLAN_ORDER,
+        "next_reset": next_reset
+    })
 
 def payment_success(request, plan):
 
@@ -140,6 +145,7 @@ def payment_success(request, plan):
 
     # temporário
     profile.plan = plan
+    profile.subscription_started_at = timezone.now()
     profile.save()
 
     return redirect("dashboard")
