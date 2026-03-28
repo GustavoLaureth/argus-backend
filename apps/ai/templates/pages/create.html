@@ -1,11 +1,14 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
 <!-- Main Content -->
 <main
   class="flex-1 overflow-y-auto bg-background-light dark:bg-background-dark"
 >
   <!-- Top Nav -->
   <header
-    class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark/50 backdrop-blur-sm flex items-center justify-between px-8 sticky top-0 z-10"
+    class="h-16 border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark/50 backdrop-blur-sm hidden lg:flex items-center justify-between px-8 sticky top-0 z-10"
   >
     <div class="flex items-center gap-2">
       <span class="material-symbols-outlined text-slate-400">note_add</span>
@@ -30,9 +33,9 @@
       </div>
     </div>
   </header>
-  <div class="max-w-4xl mx-auto p-8">
+  <div class="max-w-4xl mx-auto p-0 lg:p-8 mb-16 lg:mb-0">
     <!-- Hero Header -->
-    <div class="mb-8">
+    <div class="mb-0 p-5 lg:p-0 lg:mb-8">
       <h1 class="text-3xl font-bold text-slate-900 dark:text-white mb-2">
         Criar Novo Conteúdo
       </h1>
@@ -74,9 +77,9 @@
               Tipo de Conteúdo
             </label>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="lg:grid lg:grid-cols-3 lg:gap-4 flex justify-between gap-3">
               <!-- NOTÍCIA -->
-              <label class="cursor-pointer block relative">
+              <label class="cursor-pointer block relative w-full">
                 <input
                   type="radio"
                   name="type"
@@ -85,10 +88,10 @@
                 />
 
                 <div
-                  class="relative flex items-center p-4 border rounded-lg border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/5"
+                  class="relative flex flex-col justify-center h-[67px] lg:h-auto w-full lg:justify-start lg:flex-row items-center p-4 border rounded-lg border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/5"
                 >
                   <span
-                    class="material-symbols-outlined text-slate-500 mr-3 peer-checked:text-primary"
+                    class="material-symbols-outlined text-slate-500 m-0 lg:mr-3 peer-checked:text-primary"
                   >
                     newspaper
                   </span>
@@ -102,7 +105,7 @@
               </label>
 
               <!-- SOCIAL -->
-              <label class="cursor-pointer block relative">
+              <label class="cursor-pointer block relative w-full">
                 <input
                   type="radio"
                   name="type"
@@ -111,10 +114,10 @@
                 />
 
                 <div
-                  class="relative flex items-center p-4 border rounded-lg border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/5"
+                  class="relative flex flex-col justify-center h-[67px] lg:h-auto w-full lg:justify-start lg:flex-row items-center p-4 border rounded-lg border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/5"
                 >
                   <span
-                    class="material-symbols-outlined text-slate-500 mr-3 peer-checked:text-primary"
+                    class="material-symbols-outlined text-slate-500 m-0 lg:mr-3 peer-checked:text-primary"
                   >
                     share
                   </span>
@@ -128,7 +131,7 @@
               </label>
 
               <!-- HEADLINE -->
-              <label class="cursor-pointer block relative">
+              <label class="cursor-pointer block relative w-full">
                 <input
                   type="radio"
                   name="type"
@@ -137,18 +140,18 @@
                 />
 
                 <div
-                  class="relative flex items-center p-4 border rounded-lg border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/5"
+                  class="relative flex flex-col justify-center h-[67px] lg:h-auto w-full lg:justify-start lg:flex-row items-center p-4 border rounded-lg border-slate-200 dark:border-slate-800 hover:bg-slate-50 dark:hover:bg-slate-800 transition-all duration-200 peer-checked:border-primary peer-checked:bg-primary/5"
                 >
                   <span
-                    class="material-symbols-outlined text-slate-500 mr-3 peer-checked:text-primary"
+                    class="material-symbols-outlined text-slate-500 m-0 lg:mr-3 peer-checked:text-primary"
                   >
-                    campaign
+                    title
                   </span>
 
                   <span
                     class="text-sm font-medium text-slate-900 dark:text-slate-100"
                   >
-                    Título Chamativo
+                    Título
                   </span>
                 </div>
               </label>
@@ -161,9 +164,9 @@
           <button
             id="generateBtn"
             type="submit"
-            class="bg-primary hover:bg-primary/90 text-white px-8 py-3 rounded-lg font-semibold flex items-center gap-2 transition-all shadow-md shadow-primary/20"
+            class="justify-center bg-primary hover:bg-primary/90 w-full lg:w-auto text-white px-8 py-3 rounded-lg font-semibold flex items-center gap-2 transition-all shadow-md shadow-primary/20"
           >
-            <span class="material-symbols-outlined text-xl">bolt</span>
+            <img src="{% static 'img/icon.png' %}" alt="">
             <span id="btnText">Gerar conteúdo</span>
 
             <svg
@@ -287,7 +290,7 @@
 </div>
 
 <div id="toast"
-  class="fixed bottom-6 right-6 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20 opacity-0 pointer-events-none duration-300">
+  class="fixed bottom-[84px] right-6 flex items-center justify-center gap-2 bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-bold transition-all shadow-lg shadow-primary/20 opacity-0 pointer-events-none duration-300">
   Copiado com sucesso
 </div>
 
