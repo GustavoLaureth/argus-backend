@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
     'widget_tweaks',
+    'rest_framework',
+    'corsheaders',
 
     'argus_core.apps.ArgusCoreConfig',
     'apps.ai',
@@ -172,9 +174,9 @@ OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 GNEWS_API_KEY = os.getenv("GNEWS_API_KEY")
 
 STRIPE_PRICES = {
-    "starter": "price_1TBNlCKQllbB4m7vGyiwsDvk",
-    "creator": "price_1TBNv4KQllbB4m7voFWLiUQX",
-    "pro": "price_1TBNvFKQllbB4m7vk8WdFmEK"
+    "starter": "price_1TBMFDKQllbB4m7vHpd3QfM3",
+    "creator": "price_1TBMG0KQllbB4m7vEps18BMv",
+    "pro": "price_1TBMGBKQllbB4m7vGJUPu6FZ"
 }
 
 STRIPE_SECRET_KEY = os.getenv("STRIPE_SECRET_KEY")
