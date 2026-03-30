@@ -116,6 +116,7 @@ def create_checkout_session(request, plan):
 
     return redirect(session.url)
 
+@login_required
 def subscription(request):
     profile = request.user.userprofile
     plan = profile.plan
