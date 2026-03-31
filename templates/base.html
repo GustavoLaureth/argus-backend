@@ -59,7 +59,7 @@
   <body
     class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display transition-colors duration-200"
   >
-    <div class="flex flex-col lg:flex-row min-h-screen">
+    <div class="flex flex-col lg:flex-row h-screen">
       <!-- Sidebar -->
       <aside
         class="w-64 flex-shrink-0 hidden lg:flex flex-col border-r border-slate-200 dark:border-slate-800 bg-white dark:bg-background-dark"
@@ -130,7 +130,9 @@
                 </a>
         </div>
       </aside>
-      {% block content %}{% endblock %}
+      <main class="flex-1 overflow-y-auto">
+        {% block content %}{% endblock %}
+      </main>
       <div class="mt-30 h-[70px] border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md flex lg:hidden items-center justify-end px-8 fixed bottom-0 left-0 w-full z-50">
         <div class="w-full flex justify-between">
           <a
