@@ -93,19 +93,141 @@ Agora escreva a notícia.
 
     elif content_type == "social":
 
-        prompt = f"""
-Transforme o texto abaixo em um post para redes sociais:
+        articles = search_news(text)
 
+        if not articles:
+            context = "Nenhuma informação recente encontrada."
+        else:
+            context = build_context(articles)
+
+        prompt = f"""
+HOJE É {today}
+
+Você é um social media profissional especializado em criação de conteúdo para redes sociais.
+
+Sua tarefa é criar um post envolvente, claro e direto com base nas informações fornecidas.
+
+---
+
+CONTEXTO:
+{context}
+
+---
+
+TEMA:
 {text}
+
+---
+
+INSTRUÇÕES:
+
+- Baseie-se APENAS no CONTEXTO fornecido
+- Se não houver informações suficientes, utilize o TEMA como base e deixe claro que são informações gerais
+- NÃO invente fatos
+- NÃO use conhecimento externo
+
+---
+
+ESTILO:
+
+- Linguagem natural e envolvente
+- Direto ao ponto
+- Tom humano (pode ser leve, informativo ou provocativo dependendo do tema)
+- Frases curtas e fáceis de ler
+- Evite repetições
+- Use elementos que prendam atenção (ex: perguntas, chamadas, curiosidade)
+
+---
+
+FORMATO OBRIGATÓRIO (SEM EXCEÇÃO):
+
+Linha 1: frase de impacto (hook)
+Linha 2: contexto resumido (1 frase)
+Linha 3 em diante: desenvolvimento com frases curtas e escaneáveis
+Última linha: chamada para ação (CTA)
+
+---
+
+REGRAS IMPORTANTES:
+
+- NÃO use ** ou qualquer markdown
+- NÃO escreva "HOOK:", "CTA:" ou qualquer rótulo
+- NÃO adicione explicações fora do post
+- NÃO invente nomes, datas ou números
+- Pode usar emojis com moderação (se fizer sentido)
+
 """
 
+    elif content_type == "videoscript":
+
+        articles = search_news(text)
+
+        if not articles:
+            context = "Nenhuma informação recente encontrada."
+        else:
+            context = build_context(articles)
+
+        prompt = f"""
+HOJE É {today}
+
+Você é um roteirista profissional especializado em vídeos curtos para redes sociais.
+
+Sua tarefa é criar um roteiro de vídeo envolvente, claro e direto com base nas informações fornecidas.
+
+---
+
+CONTEXTO:
+{context}
+
+---
+
+TEMA:
+{text}
+
+---
+
+INSTRUÇÕES:
+
+- Baseie-se APENAS no CONTEXTO fornecido
+- Se não houver informações suficientes, utilize o TEMA como base e deixe claro que são informações gerais
+- NÃO invente fatos
+- NÃO use conhecimento externo
+
+---
+
+ESTILO:
+
+- Linguagem natural e dinâmica
+- Direto ao ponto
+- Tom envolvente e conversacional
+- Frases curtas e fáceis de falar
+- Evite repetições
+- Priorize ritmo e retenção de atenção
+- Seja persoasivo e provoque curiosidade
+
+---
+
+FORMATO OBRIGATÓRIO (SEM EXCEÇÃO):
+
+Linha 1: gancho forte (primeiros 3 segundos)
+Linha 2: contextualização rápida
+Linha 3 em diante: desenvolvimento em sequência lógica (como se estivesse falando)
+Última linha: chamada para ação (CTA)
+
+---
+
+REGRAS IMPORTANTES:
+
+- NÃO use ** ou qualquer markdown
+- NÃO escreva "GANCHO:", "CTA:" ou qualquer rótulo
+- NÃO adicione explicações fora do roteiro
+- NÃO invente nomes, datas ou números
+- Pode usar pausas naturais (ex: "...") para dar ritmo
+- Escreva como se fosse falado em voz alta
+
+"""
     elif content_type == "headline":
-
-        prompt = f"""
-Crie um título chamativo para o texto abaixo:
-
-{text}
-"""
+        return
 
     else:
         return "Tipo de conteúdo inválido"

@@ -91,11 +91,17 @@
           <span class="material-symbols-outlined text-sm">share</span>
           Redes Sociais
         </a>
-        <a href="?{% if 'headline' in selected_types %}{% for t in selected_types %}{% if t != 'headline' %}type={{ t }}&{% endif %}{% endfor %}{% else %}{% for t in selected_types %}type={{ t }}&{% endfor %}type=headline&{% endif %}period={{ selected_period }}"
+        <!-- <a href="?{% if 'headline' in selected_types %}{% for t in selected_types %}{% if t != 'headline' %}type={{ t }}&{% endif %}{% endfor %}{% else %}{% for t in selected_types %}type={{ t }}&{% endfor %}type=headline&{% endif %}period={{ selected_period }}"
           class="{% if 'headline' in selected_types %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
         >
           <span class="material-symbols-outlined text-sm">campaign</span>
           Títulos
+        </a> -->
+        <a href="?{% if 'videoscript' in selected_types %}{% for t in selected_types %}{% if t != 'videoscript' %}type={{ t }}&{% endif %}{% endfor %}{% else %}{% for t in selected_types %}type={{ t }}&{% endfor %}type=videoscript&{% endif %}period={{ selected_period }}"
+          class="{% if 'videoscript' in selected_types %}bg-primary text-white px-4 py-1.5 rounded-full text-xs font-semibold flex items-center gap-1{% else %}bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 text-slate-600 dark:text-slate-400 px-4 py-1.5 rounded-full text-xs font-medium hover:border-primary/50 hover:text-primary transition-all flex items-center gap-1{% endif %}"
+        >
+          <span class="material-symbols-outlined text-sm">campaign</span>
+          Roteiros de Vídeo
         </a>
         <div class="h-4 w-[1px] bg-slate-300 dark:bg-slate-700 mx-2"></div>
         <a href="?{% for t in selected_types %}type={{ t }}&{% endfor %}period=7"

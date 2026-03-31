@@ -39,6 +39,7 @@ def dashboard(request):
     "news": 10,
     "social": 5,
     "headline": 2,
+    "videoscript": 8
   }
 
   total_minutes = 0

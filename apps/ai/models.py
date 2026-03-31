@@ -4,9 +4,10 @@ from django.contrib.auth.models import User
 class Generation(models.Model):
 
     CONTENT_TYPES = [
-        ("news", "News"),
-        ("social", "Social"),
-        ("headline", "Headline"),
+        ("news", "Notícias"),
+        ("social", "Redes Sociais"),
+        ("headline", "Título"),
+        ("videoscript", "Roteiro de Vídeo"),
     ]
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
